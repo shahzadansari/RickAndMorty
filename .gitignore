@@ -34,7 +34,7 @@ build/
 .classpath
 .project
 
-# IDEA/Android Studio project files, because the project can be imported from settings.gradle.kts
+# IDEA/Android Studio project files, because the project can be imported from settings.gradle.kts.kts
 /.idea/
 .idea/*
 !.idea/copyright
