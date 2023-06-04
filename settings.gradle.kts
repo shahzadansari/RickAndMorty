@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Modularized-RickAndMortyApp"
 include(":app")
+include(":components")
