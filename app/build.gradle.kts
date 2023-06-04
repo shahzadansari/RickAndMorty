@@ -1,20 +1,20 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    id(Plugins.moduleApp)
+    id(Plugins.kotlinAndroid)
 }
 
 android {
     namespace = "com.example.modularized_rickandmortyapp"
-    compileSdk = 33
+    compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
-        applicationId = "com.example.modularized_rickandmortyapp"
-        minSdk = 24
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = ProjectConfig.applicationId
+        minSdk = ProjectConfig.minSdk
+        targetSdk = ProjectConfig.targetSdk
+        versionCode = ProjectConfig.versionCode
+        versionName = ProjectConfig.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -41,7 +41,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.7"
+        kotlinCompilerExtensionVersion = ProjectConfig.kotlinCompilerExtensionVersion
     }
     packaging {
         resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
