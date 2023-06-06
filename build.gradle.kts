@@ -2,5 +2,6 @@
 plugins {
     id(Plugins.moduleApp) version ProjectConfig.androidGradlePlugin apply false
     id(Plugins.moduleLib) version ProjectConfig.androidGradlePlugin apply false
-    id(Plugins.kotlinAndroid) version ProjectConfig.kotlinVersion apply false
+    id(Plugins.kotlinAndroid) version ProjectConfig.kotlinAndroidVersion apply false
+    id(Plugins.kotlinJvm) version ProjectConfig.kotlinJvmVersion apply false
 }
