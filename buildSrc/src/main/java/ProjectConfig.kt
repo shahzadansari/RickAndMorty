@@ -9,8 +9,7 @@ object ProjectConfig {
     const val versionName = "1.0"
 
     /** Compose to Kotlin Compatibility Map: https://developer.android.com/jetpack/androidx/releases/compose-kotlin#pre-release_kotlin_compatibility **/
-    const val kotlinAndroidVersion = "1.8.21"
-    const val kotlinJvmVersion = "1.8.0"
+    const val kotlinVersion = "1.8.21"
     const val kotlinCompilerExtensionVersion = "1.4.7"
-
+    const val kotlinJvmVersion = "1.8.0"
 }
