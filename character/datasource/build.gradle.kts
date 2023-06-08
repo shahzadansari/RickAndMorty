@@ -14,4 +14,10 @@ dependencies {
     implementation(project(Modules.characterDomain))
 
     implementation(KotlinX.jsonSerialization)
+
+    implementation(Ktor.core)
+    implementation(Ktor.androidClient)
+    implementation(Ktor.clientSerialization)
+    implementation(Ktor.contentNegotiation)
+    implementation(Ktor.logging)
 }

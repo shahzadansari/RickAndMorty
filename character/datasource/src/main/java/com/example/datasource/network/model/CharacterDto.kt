@@ -5,7 +5,22 @@ import com.example.domain.Character
 import com.example.domain.CharacterStatus
 import com.example.domain.Gender
 import com.example.domain.Location
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+
+@Serializable
+data class GetCharactersDto(
+    val info: InfoDto,
+    val results: List<CharacterDto>
+)
+
+@Serializable
+data class InfoDto(
+    val count: Int,
+    val pages: Int,
+    @SerialName("next") val nextPageUrl: String?,
+    @SerialName("prev") val previousPageUrl: String?
+)
 
 @Serializable
 data class CharacterDto(
@@ -17,7 +32,7 @@ data class CharacterDto(
     val gender: String,
     val origin: LocationDto,
     val location: LocationDto,
-    val imageUrl: String
+    @SerialName("image") val imageUrl: String
 )
 
 @Serializable
@@ -29,10 +44,10 @@ data class LocationDto(
 fun CharacterDto.toCharacter() = Character(
     id = id,
     name = name,
-    status = CharacterStatus.valueOf(status),
+    status = CharacterStatus.values().find { it.status == status } ?: CharacterStatus.Unknown,
     species = species,
     type = type,
-    gender = Gender.valueOf(gender),
+    gender = Gender.values().find { it.gender == gender } ?: Gender.Unknown,
     origin = origin.toLocation(),
     location = location.toLocation(),
     imageUrl = imageUrl
