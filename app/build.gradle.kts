@@ -52,6 +52,7 @@ dependencies {
     implementation(project(Modules.components))
     implementation(project(Modules.character_ui_list))
     implementation(project(Modules.characterInteractors))
+    implementation(project(Modules.characterDomain))
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.lifecycleRuntimeKtx)
