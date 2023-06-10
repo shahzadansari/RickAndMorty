@@ -3,6 +3,8 @@ object Plugins {
     val moduleLib = "com.android.library"
     val moduleJavaLib = "java-library"
 
+    val hiltAndroid = "com.google.dagger.hilt.android"
+
     val kotlinAndroid = "org.jetbrains.kotlin.android" // Gradle plugin for building Kotlin projects that target Android
     val kotlinJvm = "org.jetbrains.kotlin.jvm" // Gradle plugin for building Kotlin projects that target JVM
     val kotlinKapt = "kotlin-kapt"
