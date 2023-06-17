@@ -11,4 +11,5 @@ object Plugins {
     val kotlinParcelize = "kotlin-parcelize"
     val kotlinSerialization = "plugin.serialization" // Or use: org.jetbrains.kotlin.plugin.serialization
 
+    val sqlDelightGradle = "com.squareup.sqldelight"
 }

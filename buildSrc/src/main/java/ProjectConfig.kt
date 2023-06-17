@@ -14,4 +14,6 @@ object ProjectConfig {
     const val kotlinVersion = "1.8.21"
     const val kotlinCompilerExtensionVersion = "1.4.7"
     const val kotlinJvmVersion = "1.8.0"
+
+    const val sqlDelightGradlePluginVersion = "1.5.4"
 }

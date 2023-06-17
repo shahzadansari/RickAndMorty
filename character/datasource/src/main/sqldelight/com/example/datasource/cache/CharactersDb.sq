@@ -1,0 +1,17 @@
+CREATE TABLE CharacterEntity(
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    status TEXT NOT NULL,
+    species TEXT NOT NULL,
+    type TEXT NOT NULL,
+    gender TEXT NOT NULL,
+    origin TEXT NOT NULL, -- TODO: Store location objects in Database instead of location name only
+    location TEXT NOT NULL,
+    imageUrl TEXT NOT NULL
+);
+
+getAllCharacters: SELECT * FROM CharacterEntity;
+
+insertCharacter:
+INSERT OR REPLACE INTO CharacterEntity (id, name, status, species, type, gender, origin, location, imageUrl)
+VALUES (?,?,?,?,?,?,?,?,?);
