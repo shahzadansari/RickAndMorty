@@ -1,7 +1,10 @@
 plugins {
     id(Plugins.moduleJavaLib)
+
     id(Plugins.kotlinJvm)
     kotlin(Plugins.kotlinSerialization) version ProjectConfig.kotlinVersion
+
+    id(SqlDelight.plugin)
 }
 
 java {
@@ -20,4 +23,13 @@ dependencies {
     implementation(Ktor.clientSerialization)
     implementation(Ktor.contentNegotiation)
     implementation(Ktor.logging)
+
+    implementation(SqlDelight.runtime)
+}
+
+sqldelight {
+    database("CharactersDatabase") {
+        packageName = "com.example.datasource.cache"
+        sourceFolders = listOf("sqldelight")
+    }
 }
