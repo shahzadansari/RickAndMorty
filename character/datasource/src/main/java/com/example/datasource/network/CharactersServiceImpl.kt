@@ -7,7 +7,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 
-class CharacterServiceImpl(private val httpClient: HttpClient) : CharacterService {
+class CharactersServiceImpl(private val httpClient: HttpClient) : CharactersService {
 
     override suspend fun getAllCharacters(): List<Character> {
         return httpClient
