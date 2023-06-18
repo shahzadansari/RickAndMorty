@@ -11,12 +11,12 @@ import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-interface CharacterService {
+interface CharactersService {
     suspend fun getAllCharacters(): List<Character>
 
     companion object Factory {
-        fun build(): CharacterServiceImpl {
-            return CharacterServiceImpl(httpClient = httpClient)
+        fun build(): CharactersServiceImpl {
+            return CharactersServiceImpl(httpClient = httpClient)
         }
     }
 }

@@ -65,4 +65,6 @@ dependencies {
 
     implementation(Hilt.hiltAndroid)
     kapt(Hilt.hiltCompiler)
+
+    implementation(SqlDelight.androidDriver)
 }

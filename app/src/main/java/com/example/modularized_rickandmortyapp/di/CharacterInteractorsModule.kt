@@ -1,6 +1,9 @@
 package com.example.modularized_rickandmortyapp.di
 
+import android.app.Application
 import com.example.interactors.CharacterInteractors
+import com.squareup.sqldelight.android.AndroidSqliteDriver
+import com.squareup.sqldelight.db.SqlDriver
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +16,17 @@ object CharacterInteractorsModule {
 
     @Provides
     @Singleton
-    fun provideCharacterInteractors(): CharacterInteractors {
-        return CharacterInteractors.build()
+    fun provideAndroidDriver(app: Application): SqlDriver {
+        return AndroidSqliteDriver(
+            schema = CharacterInteractors.schema,
+            context = app,
+            name = CharacterInteractors.dbName
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideCharacterInteractors(sqlDriver: SqlDriver): CharacterInteractors {
+        return CharacterInteractors.build(sqlDriver)
     }
 }
