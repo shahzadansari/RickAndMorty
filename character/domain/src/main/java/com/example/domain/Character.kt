@@ -12,7 +12,7 @@ data class Character(
     val imageUrl: String
 )
 
-enum class CharacterStatus(val status: String) {
+enum class CharacterStatus(val value: String) {
     Alive("Alive"),
     Dead("Dead"),
     Unknown("unknown");

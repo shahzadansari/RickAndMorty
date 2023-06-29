@@ -44,7 +44,7 @@ data class LocationDto(
 fun CharacterDto.toCharacter() = Character(
     id = id,
     name = name,
-    status = CharacterStatus.values().find { it.status == status } ?: CharacterStatus.Unknown,
+    status = CharacterStatus.values().find { it.value == status } ?: CharacterStatus.Unknown,
     species = species,
     type = type,
     gender = Gender.values().find { it.gender == gender } ?: Gender.Unknown,
