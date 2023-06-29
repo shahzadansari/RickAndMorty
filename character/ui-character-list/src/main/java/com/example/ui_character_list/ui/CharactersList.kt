@@ -16,6 +16,7 @@ import com.example.ui_character_list.components.CharacterListItem
 @Composable
 fun CharactersList(
     state: CharactersListState,
+    navigateToDetailScreen: (characterId: Int) -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         if (state.isLoading) {
@@ -25,7 +26,10 @@ fun CharactersList(
         }
         LazyColumn {
             items(state.characters) { character -> // TODO: Check for empty list
-                CharacterListItem(character = character, onCharacterSelected = {})
+                CharacterListItem(
+                    character = character,
+                    onCharacterSelected = { navigateToDetailScreen(it) }
+                )
             }
         }
     }
