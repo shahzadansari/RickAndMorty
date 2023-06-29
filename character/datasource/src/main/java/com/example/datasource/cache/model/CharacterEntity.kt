@@ -10,7 +10,7 @@ import com.example.domain.Location
 fun CharacterEntity.toCharacter() = Character(
     id = id.toInt(),
     name = name,
-    status = CharacterStatus.values().find { it.status == status } ?: CharacterStatus.Unknown,
+    status = CharacterStatus.values().find { it.value == status } ?: CharacterStatus.Unknown,
     species = species,
     type = type,
     gender = Gender.values().find { it.gender == gender } ?: Gender.Unknown,

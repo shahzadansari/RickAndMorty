@@ -18,7 +18,7 @@ class CharactersCacheImpl(
             queries.insertCharacter(
                 id = id.toLong(),
                 name = name,
-                status = status.status,
+                status = status.value,
                 species = species,
                 type = type,
                 gender = gender.gender,

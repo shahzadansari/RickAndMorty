@@ -1,4 +1,5 @@
 @file:Suppress("UnstableApiUsage")
+
 plugins {
     id(Plugins.moduleLib)
     id(Plugins.hiltAndroid)
@@ -34,7 +35,9 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.core))
     implementation(project(Modules.characterInteractors))
+    implementation(project(Modules.characterDomain))
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.lifecycleRuntimeKtx)
