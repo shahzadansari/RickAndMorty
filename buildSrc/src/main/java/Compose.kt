@@ -11,4 +11,10 @@ object Compose {
     val util = "androidx.compose.ui:ui-util"
     val toolingPreview = "androidx.compose.ui:ui-tooling-preview"
     val material3 = "androidx.compose.material3:material3"
+
+    private const val navigationVersion = "2.6.0"
+    val navigation = "androidx.navigation:navigation-compose:$navigationVersion"
+
+    private const val hiltNavigationComposeVersion = "1.0.0"
+    const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:$hiltNavigationComposeVersion"
 }

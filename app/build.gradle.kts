@@ -51,6 +51,7 @@ dependencies {
     implementation(project(Modules.core))
     implementation(project(Modules.components))
     implementation(project(Modules.character_ui_list))
+    implementation(project(Modules.character_ui_details))
     implementation(project(Modules.characterInteractors))
     implementation(project(Modules.characterDomain))
 
@@ -64,6 +65,8 @@ dependencies {
     implementation(Compose.material3)
     implementation(Compose.toolingPreview)
     implementation(Compose.ui)
+    implementation(Compose.navigation)
+    implementation(Compose.hiltNavigation)
 
     implementation(Hilt.hiltAndroid)
     kapt(Hilt.hiltCompiler)
