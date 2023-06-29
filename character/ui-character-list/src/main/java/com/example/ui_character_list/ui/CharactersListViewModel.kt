@@ -17,7 +17,13 @@ class CharactersListViewModel @Inject constructor(
     val state = mutableStateOf(CharactersListState())
 
     init {
-        getAllCharacters()
+        onTriggerEvent(CharactersListEvent.GetAllCharacters)
+    }
+
+    fun onTriggerEvent(event: CharactersListEvent) {
+        when (event) {
+            CharactersListEvent.GetAllCharacters -> getAllCharacters()
+        }
     }
 
     private fun getAllCharacters() {
