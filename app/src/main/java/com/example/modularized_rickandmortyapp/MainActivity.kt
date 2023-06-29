@@ -3,6 +3,7 @@ package com.example.modularized_rickandmortyapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -17,50 +18,24 @@ import com.example.interactors.GetAllCharacters
 import com.example.modularized_rickandmortyapp.ui.theme.ModularizedRickAndMortyAppTheme
 import com.example.ui_character_list.ui.CharactersList
 import com.example.ui_character_list.ui.CharactersListState
+import com.example.ui_character_list.ui.CharactersListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var getAllCharacters: GetAllCharacters
-
-    private val state = mutableStateOf(CharactersListState())
+    private val viewModel: CharactersListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LaunchedEffect(Unit) {
-                getAllCharacters.execute().collect { dataState ->
-                    state.value = state.value.copy(isLoading = dataState is DataState.Loading)
-                    if (dataState is DataState.Success) {
-                        state.value = state.value.copy(characters = dataState.data)
-                    }
-                }
-            }
             ModularizedRickAndMortyAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    CharactersList(state = state.value)
+                    CharactersList(state = viewModel.state.value)
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ModularizedRickAndMortyAppTheme {
-        Greeting("Android")
     }
 }
