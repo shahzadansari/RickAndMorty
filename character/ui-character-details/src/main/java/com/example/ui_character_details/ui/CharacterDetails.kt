@@ -16,11 +16,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.example.components.GenericDialog
 import com.example.components.colorResource
+import com.example.core.UIComponent
 import com.example.modularized_rickandmortyapp.character.ui_character_details.R
 
 @Composable
-fun CharacterDetails(state: CharacterDetailsState) {
+fun CharacterDetails(
+    state: CharacterDetailsState,
+    onTriggerEvent: (event: CharacterDetailsEvent) -> Unit
+) {
     Box(modifier = Modifier.fillMaxSize()) {
         if (state.isLoading) {
             Box(modifier = Modifier.fillMaxSize()) {
@@ -57,6 +62,17 @@ fun CharacterDetails(state: CharacterDetailsState) {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(text = "Origin: ${character.origin.name}")
+                }
+            }
+        }
+        if (state.errorQueue.isNotEmpty()) {
+            state.errorQueue.peek()?.let { uiComponent ->
+                if (uiComponent is UIComponent.Dialog) {
+                    GenericDialog(
+                        title = uiComponent.title,
+                        description = uiComponent.description,
+                        onDismiss = { onTriggerEvent(CharacterDetailsEvent.RemoveHeadFromQueue) }
+                    )
                 }
             }
         }
