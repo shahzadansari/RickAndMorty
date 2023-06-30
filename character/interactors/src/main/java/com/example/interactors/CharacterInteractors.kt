@@ -1,12 +1,12 @@
 package com.example.interactors
 
 import com.example.datasource.cache.CharactersCache
-import com.example.datasource.cache.CharactersDatabase
 import com.example.datasource.network.CharactersService
 import com.squareup.sqldelight.db.SqlDriver
 
 data class CharacterInteractors(
-    val getAllCharacters: GetAllCharacters
+    val getAllCharacters: GetAllCharacters,
+    val getCharacterFromCache: GetCharacterFromCache
 ) {
     companion object Factory {
         val schema = CharactersCache.schema
@@ -17,7 +17,8 @@ data class CharacterInteractors(
             val cache = CharactersCache.build(sqlDriver)
 
             return CharacterInteractors(
-                getAllCharacters = GetAllCharacters(service, cache)
+                getAllCharacters = GetAllCharacters(service, cache),
+                getCharacterFromCache = GetCharacterFromCache(cache)
             )
         }
     }

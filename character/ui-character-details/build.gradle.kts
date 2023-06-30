@@ -1,7 +1,10 @@
 @file:Suppress("UnstableApiUsage")
+
 plugins {
     id(Plugins.moduleLib)
+    id(Plugins.hiltAndroid)
     id(Plugins.kotlinAndroid)
+    id(Plugins.kotlinKapt)
 }
 
 android {
@@ -40,9 +43,14 @@ dependencies {
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.lifecycleRuntimeKtx)
 
+    implementation(Coil.coil)
+
     implementation(platform(Compose.composeBom))
     implementation(Compose.activity)
     implementation(Compose.material3)
     implementation(Compose.toolingPreview)
     implementation(Compose.ui)
+
+    implementation(Hilt.hiltAndroid)
+    kapt(Hilt.hiltCompiler)
 }

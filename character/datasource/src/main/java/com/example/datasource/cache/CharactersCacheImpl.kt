@@ -39,4 +39,8 @@ class CharactersCacheImpl(
             }
         }
     }
+
+    override suspend fun getCharacter(id: Int): Character {
+        return queries.getCharacter(id.toLong()).executeAsOne().toCharacter()
+    }
 }
