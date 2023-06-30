@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.characterDomain))
+
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.lifecycleRuntimeKtx)
 

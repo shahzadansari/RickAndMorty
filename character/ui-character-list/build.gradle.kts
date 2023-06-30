@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation(project(Modules.core))
+    implementation(project(Modules.components))
     implementation(project(Modules.characterInteractors))
     implementation(project(Modules.characterDomain))
 

@@ -15,13 +15,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.example.components.colorResource
 import com.example.domain.Character
-import com.example.domain.CharacterStatus
 import com.example.modularized_rickandmortyapp.character.ui_character_list.R
 
 @Composable
@@ -73,10 +72,3 @@ fun CharacterListItem(
         }
     }
 }
-
-fun CharacterStatus.colorResource() =
-    when (this) {
-        CharacterStatus.Alive -> Color.Green
-        CharacterStatus.Dead -> Color.Red
-        CharacterStatus.Unknown -> Color.Blue
-    }
