@@ -15,3 +15,6 @@ getAllCharacters: SELECT * FROM CharacterEntity;
 insertCharacter:
 INSERT OR REPLACE INTO CharacterEntity (id, name, status, species, type, gender, origin, location, imageUrl)
 VALUES (?,?,?,?,?,?,?,?,?);
+
+getCharacter:
+SELECT * FROM CharacterEntity WHERE id = :id;
