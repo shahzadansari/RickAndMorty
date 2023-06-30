@@ -26,7 +26,12 @@ class GetAllCharacters(
             cache.insertCharacters(characters)
             val cachedCharacters = cache.getAllCharacters()
 
-            emit(DataState.Success(data = cachedCharacters))
+            if (cachedCharacters.isNotEmpty()) {
+                emit(DataState.Success(data = cachedCharacters))
+            } else {
+                throw Exception("Couldn't fetch characters")
+            }
+
         } catch (e: Exception) {
             emit(DataState.Error(e))
         }
