@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GenericDialog(title: String, modifier: Modifier = Modifier, description: String?, onDismiss: () -> Unit) {
-    AlertDialog(onDismissRequest = { onDismiss() }, modifier = modifier) {
+    AlertDialog(modifier = modifier, onDismissRequest = { onDismiss() }) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
