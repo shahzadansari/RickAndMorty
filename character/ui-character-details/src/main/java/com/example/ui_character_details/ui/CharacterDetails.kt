@@ -1,24 +1,20 @@
 package com.example.ui_character_details.ui
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.components.GenericDialog
+import com.example.components.DefaultScreenUI
 import com.example.components.colorResource
-import com.example.core.UIComponent
 import com.example.modularized_rickandmortyapp.character.ui_character_details.R
 
 @Composable
@@ -26,12 +22,11 @@ fun CharacterDetails(
     state: CharacterDetailsState,
     onTriggerEvent: (event: CharacterDetailsEvent) -> Unit
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        if (state.isLoading) {
-            Box(modifier = Modifier.fillMaxSize()) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            }
-        }
+    DefaultScreenUI(
+        isLoading = state.isLoading,
+        errorQueue = state.errorQueue,
+        onRemoveHeadFromQueue = { onTriggerEvent(CharacterDetailsEvent.RemoveHeadFromQueue) }
+    ) {
         state.character?.let { character ->
             Column(modifier = Modifier.fillMaxSize()) {
                 AsyncImage(
@@ -62,17 +57,6 @@ fun CharacterDetails(
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(text = "Origin: ${character.origin.name}")
-                }
-            }
-        }
-        if (state.errorQueue.isNotEmpty()) {
-            state.errorQueue.peek()?.let { uiComponent ->
-                if (uiComponent is UIComponent.Dialog) {
-                    GenericDialog(
-                        title = uiComponent.title,
-                        description = uiComponent.description,
-                        onDismiss = { onTriggerEvent(CharacterDetailsEvent.RemoveHeadFromQueue) }
-                    )
                 }
             }
         }

@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.core))
     implementation(project(Modules.characterDomain))
 
     implementation(AndroidX.coreKtx)
