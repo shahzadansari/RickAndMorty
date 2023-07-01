@@ -71,5 +71,8 @@ dependencies {
     implementation(Hilt.hiltAndroid)
     kapt(Hilt.hiltCompiler)
 
+    implementation(Paging.runtime)
+    implementation(Paging.compose)
+
     implementation(SqlDelight.androidDriver)
 }

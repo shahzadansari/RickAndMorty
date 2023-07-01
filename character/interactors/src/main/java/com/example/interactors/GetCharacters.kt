@@ -7,17 +7,17 @@ import com.example.domain.Character
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class GetAllCharacters(
+class GetCharacters(
     private val service: CharactersService,
     private val cache: CharactersCache
 ) {
 
-    fun execute(): Flow<DataState<List<Character>>> = flow {
+    fun execute(page: Int = 1): Flow<DataState<List<Character>>> = flow {
         try {
             emit(DataState.Loading())
 
             val characters = try {
-                service.getAllCharacters()
+                service.getCharacters(page)
             } catch (exception: Exception) {
                 println(exception.localizedMessage)
                 listOf()

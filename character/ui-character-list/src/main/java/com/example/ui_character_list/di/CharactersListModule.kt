@@ -1,7 +1,7 @@
 package com.example.ui_character_list.di
 
 import com.example.interactors.CharacterInteractors
-import com.example.interactors.GetAllCharacters
+import com.example.interactors.GetCharacters
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,8 +14,8 @@ object CharactersListModule {
 
     @Provides
     @Singleton
-    fun provideGetAllCharactersInteractor(interactors: CharacterInteractors): GetAllCharacters {
-        return interactors.getAllCharacters
+    fun provideGetAllCharactersInteractor(interactors: CharacterInteractors): GetCharacters {
+        return interactors.getCharacters
     }
 
 }

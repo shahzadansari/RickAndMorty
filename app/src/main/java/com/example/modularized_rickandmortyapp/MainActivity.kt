@@ -9,6 +9,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.modularized_rickandmortyapp.ui.navigation.Screen
 import com.example.modularized_rickandmortyapp.ui.theme.ModularizedRickAndMortyAppTheme
 import com.example.ui_character_details.ui.CharacterDetails
@@ -42,8 +43,10 @@ fun NavGraphBuilder.charactersListScreen(navController: NavController) {
         route = Screen.CharactersList.route
     ) {
         val viewModel: CharactersListViewModel = hiltViewModel()
+        val paginatedCharacters = viewModel.charactersPagingData.collectAsLazyPagingItems()
         CharactersList(
             state = viewModel.state.value,
+            paginatedCharacters = paginatedCharacters,
             navigateToDetailScreen = { characterId ->
                 navController.navigate("${Screen.CharacterDetails.route}/$characterId")
             },
