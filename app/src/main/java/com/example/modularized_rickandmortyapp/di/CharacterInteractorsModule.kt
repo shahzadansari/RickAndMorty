@@ -1,7 +1,7 @@
 package com.example.modularized_rickandmortyapp.di
 
 import android.app.Application
-import com.example.interactors.CharacterInteractors
+import com.example.character_interactors.CharacterInteractors
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
 import dagger.Module

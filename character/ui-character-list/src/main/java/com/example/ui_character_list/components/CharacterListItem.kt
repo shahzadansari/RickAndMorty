@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.components.colorResource
-import com.example.domain.Character
+import com.example.character_domain.Character
 import com.example.modularized_rickandmortyapp.character.ui_character_list.R
 
 @Composable

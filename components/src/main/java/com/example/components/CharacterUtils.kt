@@ -1,7 +1,7 @@
 package com.example.components
 
 import androidx.compose.ui.graphics.Color
-import com.example.domain.CharacterStatus
+import com.example.character_domain.CharacterStatus
 
 fun CharacterStatus.colorResource() =
     when (this) {

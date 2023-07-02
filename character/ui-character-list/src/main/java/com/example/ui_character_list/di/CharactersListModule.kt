@@ -1,7 +1,7 @@
 package com.example.ui_character_list.di
 
-import com.example.interactors.CharacterInteractors
-import com.example.interactors.GetCharacters
+import com.example.character_interactors.CharacterInteractors
+import com.example.character_interactors.GetCharacters
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.DataState
 import com.example.core.Queue
 import com.example.core.UIComponent
-import com.example.interactors.GetCharacterFromCache
+import com.example.character_interactors.GetCharacterFromCache
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
