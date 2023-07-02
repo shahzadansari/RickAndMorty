@@ -6,14 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.DataState
 import com.example.core.Queue
 import com.example.core.UIComponent
-import com.example.interactors.GetAllCharacters
+import com.example.interactors.GetCharacters
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CharactersListViewModel @Inject constructor(
-    private val getAllCharacters: GetAllCharacters
+    private val getCharacters: GetCharacters
 ) : ViewModel() {
 
     val state = mutableStateOf(CharactersListState())
@@ -24,14 +24,14 @@ class CharactersListViewModel @Inject constructor(
 
     fun onTriggerEvent(event: CharactersListEvent) {
         when (event) {
-            is CharactersListEvent.GetAllCharacters -> getAllCharacters()
+            is CharactersListEvent.GetAllCharacters -> getCharacters()
             is CharactersListEvent.RemoveHeadFromQueue -> removeHeadMessage()
         }
     }
 
-    private fun getAllCharacters() {
+    private fun getCharacters() {
         viewModelScope.launch {
-            getAllCharacters.execute().collect { dataState ->
+            getCharacters.execute().collect { dataState ->
                 state.value = state.value.copy(isLoading = dataState is DataState.Loading)
                 if (dataState is DataState.Success) {
                     state.value = state.value.copy(characters = dataState.data)

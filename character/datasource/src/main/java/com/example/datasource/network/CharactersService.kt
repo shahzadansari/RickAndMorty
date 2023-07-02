@@ -12,7 +12,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 interface CharactersService {
-    suspend fun getAllCharacters(): List<Character>
+    suspend fun getCharacters(page: Int): List<Character>
 
     companion object Factory {
         fun build(): CharactersServiceImpl {

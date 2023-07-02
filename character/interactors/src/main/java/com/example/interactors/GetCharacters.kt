@@ -7,7 +7,7 @@ import com.example.domain.Character
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class GetAllCharacters(
+class GetCharacters(
     private val service: CharactersService,
     private val cache: CharactersCache
 ) {
@@ -17,7 +17,7 @@ class GetAllCharacters(
             emit(DataState.Loading())
 
             val characters = try {
-                service.getAllCharacters()
+                getCharacters(service)
             } catch (exception: Exception) {
                 println(exception.localizedMessage)
                 listOf()
@@ -35,5 +35,18 @@ class GetAllCharacters(
         } catch (e: Exception) {
             emit(DataState.Error(e))
         }
+    }
+
+    /**
+     * getCharacters() method returns 100 characters from API. This API automatically limits each API response to 20 characters only and since pagination is not in place yet, this method loads characters till page 5.
+     * */
+    private suspend fun getCharacters(service: CharactersService): List<Character> {
+        val characters = mutableListOf<Character>()
+        characters.addAll(service.getCharacters(page = 1))
+        characters.addAll(service.getCharacters(page = 2))
+        characters.addAll(service.getCharacters(page = 3))
+        characters.addAll(service.getCharacters(page = 4))
+        characters.addAll(service.getCharacters(page = 5))
+        return characters
     }
 }
