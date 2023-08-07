@@ -43,7 +43,7 @@ fun NavGraphBuilder.charactersListScreen(navController: NavController) {
     ) {
         val viewModel: CharactersListViewModel = hiltViewModel()
         CharactersList(
-            state = viewModel.state.value,
+            state = viewModel.state,
             navigateToDetailScreen = { characterId ->
                 navController.navigate("${Screen.CharacterDetails.route}/$characterId")
             },
@@ -61,7 +61,7 @@ fun NavGraphBuilder.characterDetailsScreen() {
     ) {
         val viewModel: CharacterDetailsViewModel = hiltViewModel()
         CharacterDetails(
-            state = viewModel.state.value,
+            state = viewModel.state,
             onTriggerEvent = {
                 viewModel.onTriggerEvent(it)
             }

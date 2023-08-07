@@ -1,6 +1,8 @@
 package com.example.ui_character_list.ui
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.character_interactors.GetCharacters
@@ -16,7 +18,8 @@ class CharactersListViewModel @Inject constructor(
     private val getCharacters: GetCharacters
 ) : ViewModel() {
 
-    val state = mutableStateOf(CharactersListState())
+    var state by mutableStateOf(CharactersListState())
+        private set
 
     init {
         onTriggerEvent(CharactersListEvent.GetAllCharacters)
@@ -32,9 +35,9 @@ class CharactersListViewModel @Inject constructor(
     private fun getCharacters() {
         viewModelScope.launch {
             getCharacters.execute().collect { dataState ->
-                state.value = state.value.copy(isLoading = dataState is DataState.Loading)
+                state = state.copy(isLoading = dataState is DataState.Loading)
                 if (dataState is DataState.Success) {
-                    state.value = state.value.copy(characters = dataState.data)
+                    state = state.copy(characters = dataState.data)
                 } else if (dataState is DataState.Error) {
                     appendToMessageQueue(
                         uiComponent = UIComponent.Dialog(
@@ -48,18 +51,18 @@ class CharactersListViewModel @Inject constructor(
     }
 
     private fun appendToMessageQueue(uiComponent: UIComponent) {
-        val queue = state.value.errorQueue
+        val queue = state.errorQueue
         queue.add(uiComponent)
-        state.value = state.value.copy(errorQueue = Queue(mutableListOf())) // forces recompose
-        state.value = state.value.copy(errorQueue = queue)
+        state = state.copy(errorQueue = Queue(mutableListOf())) // forces recompose
+        state = state.copy(errorQueue = queue)
     }
 
     private fun removeHeadMessage() {
         try {
-            val queue = state.value.errorQueue
+            val queue = state.errorQueue
             queue.remove() // can throw exception if empty
-            state.value = state.value.copy(errorQueue = Queue(mutableListOf())) // forces recompose
-            state.value = state.value.copy(errorQueue = queue)
+            state = state.copy(errorQueue = Queue(mutableListOf())) // forces recompose
+            state = state.copy(errorQueue = queue)
         } catch (e: Exception) {
             println(e.localizedMessage)
         }
