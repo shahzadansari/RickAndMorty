@@ -2,7 +2,6 @@ package com.example.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -19,25 +18,23 @@ fun DefaultScreenUI(
     onRemoveHeadFromQueue: () -> Unit,
     content: @Composable () -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.surface)
-        ) {
-            content()
-            if (isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            }
-            if (errorQueue.isNotEmpty()) {
-                errorQueue.peek()?.let { uiComponent ->
-                    if (uiComponent is UIComponent.Dialog) {
-                        GenericDialog(
-                            title = uiComponent.title,
-                            description = uiComponent.description,
-                            onDismiss = { onRemoveHeadFromQueue() }
-                        )
-                    }
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.surface)
+    ) {
+        content()
+        if (isLoading) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+        }
+        if (errorQueue.isNotEmpty()) {
+            errorQueue.peek()?.let { uiComponent ->
+                if (uiComponent is UIComponent.Dialog) {
+                    GenericDialog(
+                        title = uiComponent.title,
+                        description = uiComponent.description,
+                        onDismiss = { onRemoveHeadFromQueue() }
+                    )
                 }
             }
         }
