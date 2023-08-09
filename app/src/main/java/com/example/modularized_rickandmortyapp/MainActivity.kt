@@ -9,8 +9,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.components.theme.ModularizedRickAndMortyAppTheme
 import com.example.modularized_rickandmortyapp.ui.navigation.Screen
-import com.example.modularized_rickandmortyapp.ui.theme.ModularizedRickAndMortyAppTheme
 import com.example.ui_character_details.ui.CharacterDetails
 import com.example.ui_character_details.ui.CharacterDetailsViewModel
 import com.example.ui_character_list.ui.CharactersList
