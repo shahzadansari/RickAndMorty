@@ -55,7 +55,7 @@ fun CharacterDetails(
                         contentDescription = character.name,
                         modifier = Modifier
                             .padding(top = 20.dp)
-                            .height(100.dp)
+                            .height(150.dp)
                             .clip(CircleShape)
                     )
                 }
@@ -70,7 +70,7 @@ fun CharacterDetails(
                             .fillMaxWidth()
                             .padding(8.dp)
                     ) {
-                        Text(text = character.name, style = MaterialTheme.typography.headlineLarge)
+                        Text(text = character.name, style = MaterialTheme.typography.headlineMedium)
                         Spacer(modifier = Modifier.height(8.dp))
 
                         Text(text = "Status: ${character.status.name}", style = MaterialTheme.typography.bodyLarge)
