@@ -67,4 +67,5 @@ This app has two screens:
 
 ## Modularization Overview
 
-<img width="528" alt="modulairzation-overview" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/852ed873-4a66-48b2-b1d0-c95c3212da16">
+<img width="699" alt="modularization-overview" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/a911adfb-d136-473a-9dcd-f9a2d2c4e958">
+
