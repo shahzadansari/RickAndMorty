@@ -36,7 +36,7 @@ The UI layer is the pipeline that converts application data changes to a form th
 <img width="530" alt="ui-layer-arch" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/f3a89ee9-e3af-4077-9f94-73cc12486f0d">
 
 ### Data Layer
-While the UI layer contains UI-related state and UI logic, the data layer contains application data and business logic. The business logic is what gives value to your app—it's made of real-world business rules that determine how application data must be created, stored, and changed. This separation of concerns allows the data layer to be used on multiple screens, share information between different parts of the app, and reproduce business logic outside of the UI for unit testing.
+While the UI layer contains UI-related state and UI logic, the data layer contains application data and business logic. The business logic is what gives value to your app—it's made of real-world business rules that determine how application data must be created, stored, and changed. The data layer is implemented as an offline-first source of app data and business logic. It is the [source of truth](https://developer.android.com/topic/architecture#single-source-of-truth) for all data in the app.
 
 <img width="667" alt="data-layer-arch" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/3b64e4cc-3d6f-4f37-ba8b-a9ef534bc406">
 
@@ -47,7 +47,13 @@ The domain layer is an optional layer that sits between the UI layer and the dat
 
 ---
 
-This app has two screens right now:
+**Rick & Morty App** is an [offline-first app](https://developer.android.com/topic/architecture/data-layer/offline-first#:~:text=An%20offline%2Dfirst%20app%20is%20an%20app%20that%20is%20able%20to%20perform%20all%2C%20or%20a%20critical%20subset%20of%20its%20core%20functionality%20without%20access%20to%20the%20internet.%20That%20is%2C%20it%20can%20perform%20some%20or%20all%20of%20its%20business%20logic%20offline.) and the app flow works as:
+1. Characters are fetched from [Rick & Morty API](https://rickandmortyapi.com/) using Ktor-client for Android.
+2. Characters are then stored in a SqlDelight Database. Our database inside Data layer is our single source of truth.
+3. The stored characters in cache are then requested by the Usecase in our domain layer.
+4. Characters from the cache are then exposed to the UI layer where they can be accessed as observable data streams i.e. Kotlin Flows.
+
+This app has two screens:
 1. **Characters List Screen**
 2. **Character Details Screen**
 
