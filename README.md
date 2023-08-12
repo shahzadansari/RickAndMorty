@@ -2,7 +2,7 @@
 
 This project demonstrates **Clean Architecure** best practices in a **Multi-Module** Android application using **MVI** architecture pattern. This app is made entirely in Kotlin and consumes pure Kotlin libraries to manage application data **(SqlDelight, Ktor)** and UI **(Jetpack Compose)**.
 
-# Screenshots
+## Screenshots
 
 <img width="345" alt="characters-list" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/46920ca2-7616-4cb6-a6a5-01886b816c50">
 
@@ -15,3 +15,17 @@ This project demonstrates **Clean Architecure** best practices in a **Multi-Modu
 ## Dynamic Colors - Android 12+
 
 https://github.com/shahzadansari/RickAndMorty/assets/43310446/1ce325e6-265e-4a7a-bb0a-f6e1ff5c36eb
+
+## Architecture Overview
+
+<img width="530" alt="architecture-overview" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/4a1c529b-450e-45e0-ab6b-ee434e925a96">
+
+### Characters List Screen Architecture
+
+<img width="530" alt="characters-list-arch" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/9cdd1ee9-9d0d-4f56-a593-04abc2be858e">
+
+### Character Details Screen Architecture
+
+<img width="530" alt="character-details-arch" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/f2d66f2b-e4f9-4f4a-bef0-2032e517c705">
+
+
