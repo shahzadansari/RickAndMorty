@@ -28,4 +28,6 @@ https://github.com/shahzadansari/RickAndMorty/assets/43310446/1ce325e6-265e-4a7a
 
 <img width="530" alt="character-details-arch" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/f2d66f2b-e4f9-4f4a-bef0-2032e517c705">
 
+## Modularization Overview
 
+<img width="528" alt="modulairzation-overview" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/852ed873-4a66-48b2-b1d0-c95c3212da16">
