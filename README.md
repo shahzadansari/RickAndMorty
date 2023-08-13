@@ -73,7 +73,7 @@ We have following modules in our project. Among these modules, we have **Android
 | Module name                                 | Type                   | Description                                                                                                                          |
 | -------------                               | -------------          | -------------                                                                                                                        |
 | app                                         | Android Application    | Brings everything together required for the app to function correctly. This includes UI scaffolding and navigation.                  |
-| core                                        | Java/Kotlin Library    | Core business models and classes (such as DataState/Result wrapper class) that are used by multiple modules.                         |
+| core                                        | Java/Kotlin Library    | Core business models and classes (such as DataState/Result wrapper classes) that are used by multiple modules.                       |
 | character-datasource                        | Java/Kotlin Library    | Contains data-sources and private models such as `CharacterDto` & `CharacterEntity` (network and cache) for the characters module.   |
 | character-domain                            | Java/Kotlin Library    | Domain models and classes for the characters module i.e. data class `Character`                                                      |
 | character-interactors                       | Java/Kotlin Library    | Use-cases for the characters Module.                                                                                                 |
@@ -83,7 +83,6 @@ We have following modules in our project. Among these modules, we have **Android
 
 
 
-<img width="282" alt="modules" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/4ebe607b-97f7-4d59-845e-d0905f9fa49e">
+<img width="311" alt="modules" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/8366a9fb-ec19-47f3-9677-ce1d2a8590f7">
 
 <img width="481" alt="modularization-overview" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/9511a4bb-f0b9-4e55-b194-2c9bf64658d3">
-
