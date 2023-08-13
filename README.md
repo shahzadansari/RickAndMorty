@@ -66,6 +66,24 @@ This app has two screens:
 <img width="530" alt="character-details-arch" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/f2d66f2b-e4f9-4f4a-bef0-2032e517c705">
 
 ## Modularization Overview
+We have following modules in our project. Among these modules, we have **Android Application** module, **Android Library** modules & pure **Java/Kotlin Library** modules. I have preferred using pure Kotlin libraries in domain & data layers as they can easily be reused in Kotlin Multiplatform projects. Therefore, **SqlDelight** is preferred over **Room** & **Ktor client** is used instead of **Retrofit**.
 
-<img width="699" alt="modularization-overview" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/a911adfb-d136-473a-9dcd-f9a2d2c4e958">
+
+
+| Module name                                 | Type                   | Description                                                                                                                          |
+| -------------                               | -------------          | -------------                                                                                                                        |
+| app                                         | Android Application    | Brings everything together required for the app to function correctly. This includes UI scaffolding and navigation.                  |
+| core                                        | Java/Kotlin Library    | Core business models and classes (such as DataState/Result wrapper class) that are used by multiple modules.                         |
+| character-datasource                        | Java/Kotlin Library    | Contains data-sources and private models such as `CharacterDto` & `CharacterEntity` (network and cache) for the characters module.   |
+| character-domain                            | Java/Kotlin Library    | Domain models and classes for the characters module i.e. data class `Character`                                                      |
+| character-interactors                       | Java/Kotlin Library    | Use-cases for the characters Module.                                                                                                 |
+| ui-character-list                           | Android Library        | UI components for the CharactersList screen.                                                                                         |
+| ui-character-details                        | Android Library        | UI components for the CharacterDetails screen.                                                                                       |
+| components                                  | Android Library        | Common Composables.                                                                                                                  ||
+
+
+
+<img width="282" alt="modules" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/4ebe607b-97f7-4d59-845e-d0905f9fa49e">
+
+<img width="481" alt="modularization-overview" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/9511a4bb-f0b9-4e55-b194-2c9bf64658d3">
 
