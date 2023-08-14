@@ -2,7 +2,7 @@
 
 This project demonstrates **Clean Architecure** best practices in a **Multi-Module** Android application using **MVI** architecture pattern. This app is made entirely in Kotlin and consumes pure Kotlin libraries to manage application data **(SqlDelight, Ktor)** and UI **(Jetpack Compose)**.
 
-## Screenshots (Light & Dark Color Schemes)
+## 📷 Screenshots (Light & Dark Color Schemes)
 
 <img width="345" alt="characters-list" src="/screenshots/characters-list.png"> <img width="345" alt="character-details" src="/screenshots/character-details.png">
 
@@ -13,7 +13,7 @@ Dynamic Color enables users to personalize their devices to align tonally with t
 
 https://github.com/shahzadansari/RickAndMorty/assets/43310446/e3a3fa5a-0a6f-40f8-b81d-283441945c2f
 
-## Architecture Overview
+## 📐 Architecture Overview
 
 The app architecture has three layers: a [data layer](https://developer.android.com/jetpack/guide/data-layer), a [domain layer](https://developer.android.com/jetpack/guide/domain-layer) and a [UI layer](https://developer.android.com/jetpack/guide/ui-layer). The architecture follows a reactive programming model with [unidirectional data flow](https://developer.android.com/jetpack/guide/ui-layer#udf). With the data layer at the bottom, the key concepts are:
 *   Higher layers react to changes in lower layers.
@@ -59,7 +59,7 @@ This app has two screens:
 
 <img width="530" alt="character-details-arch" src="/screenshots/character-details-arch.png">
 
-## Modularization Overview
+## 📦 Modularization Overview
 We have following modules in our project. Among these modules, we have **Android Application** module, **Android Library** modules & pure **Java/Kotlin Library** modules. I have preferred using pure Kotlin libraries in domain & data layers as they can easily be reused in Kotlin Multiplatform projects. Therefore, **SqlDelight** is preferred over **Room** & **Ktor client** is used instead of **Retrofit**.
 
 
@@ -78,7 +78,7 @@ We have following modules in our project. Among these modules, we have **Android
 
 <img width="311" alt="modules" src="/screenshots/modules.png"> <img width="481" alt="modularization-overview" src="/screenshots/modularization-overview.png">
 
-## Tech Stack
+## 🗃️ Tech Stack
 * [100% Kotlin](https://kotlinlang.org/)
     + [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - perform background operations
     + [Kotlin Flow](https://kotlinlang.org/docs/flow.html) - data flow across all app layers, including views
@@ -110,17 +110,17 @@ We have following modules in our project. Among these modules, we have **Android
 * For Gradle dependency management, **buildSrc** approach is used with Kotlin DSL.
 
 
-## Find this repository useful? Leave a Star ⭐
+## ⭐ Find this repository useful? Leave a Star
 Add this repository to your watchlist to get notified about the latest updates in the repository.
 
-## Future Work ⏭️
+## ⏭️ Future Work
 - v1.0 Multi-Module App with Ktor client and SqlDelight
 - v2.0 Unit Tests
 - v3.0 UI Tests
 - v4.0 Migrate to Koin to use DI in data & interactor/domain modules
 - v5.0 Pagination
 
-## Want to Contribute? 🤝
+## 🤝 Want to Contribute?
 All contributions are welcomed. This project is still in development. If you encounter any problems, please create an issue [here](https://github.com/shahzadansari/RickAndMorty/issues) & if you want to contribute to this project, PRs are welcomed! 🙂
 
 ## 👨‍💻 Developed By
