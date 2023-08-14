@@ -4,20 +4,14 @@ This project demonstrates **Clean Architecure** best practices in a **Multi-Modu
 
 ## Screenshots (Light & Dark Color Schemes)
 
-<img width="345" alt="characters-list" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/46920ca2-7616-4cb6-a6a5-01886b816c50">
+<img width="345" alt="characters-list" src="/screenshots/characters-list.png"> <img width="345" alt="character-details" src="/screenshots/character-details.png">
 
-<img width="345" alt="character-details" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/e5356755-af20-4a40-9550-1cee56950810">
-
-<img width="345" alt="characters-list-dark" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/94145aa5-e2f2-4fd5-96b4-b45dda8521a0">
-
-<img width="345" alt="characters-details-dark" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/3021ee4e-ae05-4e0f-bad4-a74dea5d1029">
-
-
+<img width="345" alt="characters-list" src="/screenshots/characters-list-dark.png"> <img width="345" alt="character-details" src="/screenshots/characters-details-dark.png">
 
 ## Dynamic Colors - Android 12+
 Dynamic Color enables users to personalize their devices to align tonally with the color scheme of their personal wallpaper or through a selected color in the wallpaper picker. You can read more about Dynamic Colors [here](https://developer.android.com/develop/ui/views/theming/dynamic-colors).
 
-https://github.com/shahzadansari/RickAndMorty/assets/43310446/1ce325e6-265e-4a7a-bb0a-f6e1ff5c36eb
+https://github.com/shahzadansari/RickAndMorty/assets/43310446/e3a3fa5a-0a6f-40f8-b81d-283441945c2f
 
 ## Architecture Overview
 
@@ -28,22 +22,22 @@ The app architecture has three layers: a [data layer](https://developer.android.
 
 The data flow is achieved using streams, implemented using [Kotlin Flows](https://developer.android.com/kotlin/flow).
 
-<img width="530" alt="architecture-overview" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/4a1c529b-450e-45e0-ab6b-ee434e925a96">
+<img width="530" alt="architecture-overview" src="/screenshots/architecture-overview.png">
 
 ### UI Layer
 The UI layer is the pipeline that converts application data changes to a form that the UI can present and then displays it. The state is managed using a [Unidirectional Data Flow (UDF)](https://developer.android.com/topic/architecture/ui-layer#udf) which aligns with the  **MVI (Model View Intent)** architecture pattern's **event-based** nature.
 
-<img width="530" alt="ui-layer-arch" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/f3a89ee9-e3af-4077-9f94-73cc12486f0d">
+<img width="530" alt="ui-layer-arch" src="/screenshots/ui-layer-arch.png">
 
 ### Data Layer
 While the UI layer contains UI-related state and UI logic, the data layer contains application data and business logic. The business logic is what gives value to your app—it's made of real-world business rules that determine how application data must be created, stored, and changed. The data layer is implemented as an offline-first source of app data and business logic. It is the [source of truth](https://developer.android.com/topic/architecture#single-source-of-truth) for all data in the app.
 
-<img width="667" alt="data-layer-arch" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/3b64e4cc-3d6f-4f37-ba8b-a9ef534bc406">
+<img width="667" alt="data-layer-arch" src="/screenshots/data-layer-arch.png">
 
 ### Domain Layer
 The domain layer is an optional layer that sits between the UI layer and the data layer. The domain layer is responsible for encapsulating complex business logic, or simple business logic that is reused by multiple ViewModels. This layer contains Usecases/Interactors which interact with data sources inside Data Layer.
 
-<img width="540" alt="domain-layer-arch" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/d8db0c33-1d32-4508-b1f6-129046c7095e">
+<img width="540" alt="domain-layer-arch" src="/screenshots/domain-layer-arch.png">
 
 ---
 
@@ -59,11 +53,11 @@ This app has two screens:
 
 ## Characters List Screen Architecture
 
-<img width="530" alt="characters-list-arch" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/9cdd1ee9-9d0d-4f56-a593-04abc2be858e">
+<img width="530" alt="characters-list-arch" src="/screenshots/characters-list-arch.png">
 
 ## Character Details Screen Architecture
 
-<img width="530" alt="character-details-arch" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/f2d66f2b-e4f9-4f4a-bef0-2032e517c705">
+<img width="530" alt="character-details-arch" src="/screenshots/character-details-arch.png">
 
 ## Modularization Overview
 We have following modules in our project. Among these modules, we have **Android Application** module, **Android Library** modules & pure **Java/Kotlin Library** modules. I have preferred using pure Kotlin libraries in domain & data layers as they can easily be reused in Kotlin Multiplatform projects. Therefore, **SqlDelight** is preferred over **Room** & **Ktor client** is used instead of **Retrofit**.
@@ -82,10 +76,7 @@ We have following modules in our project. Among these modules, we have **Android
 | components                                  | Android Library        | Common Composables.                                                                                                                  ||
 
 
-
-<img width="311" alt="modules" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/8366a9fb-ec19-47f3-9677-ce1d2a8590f7">
-
-<img width="481" alt="modularization-overview" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/9511a4bb-f0b9-4e55-b194-2c9bf64658d3">
+<img width="311" alt="modules" src="/screenshots/modules.png"> <img width="481" alt="modularization-overview" src="/screenshots/modularization-overview.png">
 
 ## Tech Stack
 * [100% Kotlin](https://kotlinlang.org/)
