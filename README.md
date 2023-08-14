@@ -118,3 +118,27 @@ We have following modules in our project. Among these modules, we have **Android
     * Theme generated via [Material Theme Builder](https://m3.material.io/theme-builder)
 * For Gradle dependency management, **buildSrc** approach is used with Kotlin DSL.
 
+
+## Find this repository useful? Leave a Star ⭐
+Add this repository to your watchlist to get notified about the latest updates in the repository.
+
+## Future Work
+- v1.0 Multi-Module App with Ktor client and SqlDelight
+- v2.0 Unit Tests
+- v3.0 UI Tests
+- v4.0 Migrate to Koin to use DI in data & interactor/domain modules
+- v5.0 Pagination
+
+## Want to Contribute?
+All contributions are welcomed. Feel free to open a Pull Request. This project is still in development. If you encounter any problems, please create an issue [here](https://github.com/shahzadansari/RickAndMorty/issues) & if you want to contribute to this project, PRs are welcomed! 🙂
+
+## 👨‍💻 Developed By
+
+<a href="https://twitter.com/Shahzad_Ansari3" target="_blank">
+  <img src="https://avatars.githubusercontent.com/u/43310446?v=4" width="70" align="left">
+</a>
+
+**Shahzad Ansari**
+
+[![Twitter](https://img.shields.io/badge/-twitter-grey?logo=twitter)](https://twitter.com/Shahzad_Ansari3)
+[![Linkedin](https://img.shields.io/badge/-linkedin-grey?logo=linkedin)](https://www.linkedin.com/in/shahzadansari6/)
