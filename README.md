@@ -86,3 +86,35 @@ We have following modules in our project. Among these modules, we have **Android
 <img width="311" alt="modules" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/8366a9fb-ec19-47f3-9677-ce1d2a8590f7">
 
 <img width="481" alt="modularization-overview" src="https://github.com/shahzadansari/RickAndMorty/assets/43310446/9511a4bb-f0b9-4e55-b194-2c9bf64658d3">
+
+## Tech Stack
+* [100% Kotlin](https://kotlinlang.org/)
+    + [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - perform background operations
+    + [Kotlin Flow](https://kotlinlang.org/docs/flow.html) - data flow across all app layers, including views
+    + [Kotlin Symbol Processing](https://kotlinlang.org/docs/ksp-overview.html) - enable compiler plugins
+    + [Kotlin Serialization](https://kotlinlang.org/docs/serialization.html) - parse [JSON](https://www.json.org/json-en.html)
+  * [Ktor client](https://ktor.io/docs/getting-started-ktor-client-multiplatform-mobile.html) - Networking
+* [Jetpack](https://developer.android.com/jetpack)
+    * [Compose](https://developer.android.com/jetpack/compose) - modern, native UI kit
+    * [Compose Navigation](https://developer.android.com/jetpack/compose/navigation) - in-app navigation
+  * [SqlDelight](https://cashapp.github.io/sqldelight/1.5.4/) - For local cache
+  * [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - dependency injection (dependency retrieval)
+  * [Coil](https://github.com/coil-kt/coil) - image loading library
+* Modern Architecture
+  * [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+  * MVI Architecture Pattern
+  * [Android Architecture components](https://developer.android.com/topic/libraries/architecture)
+    ([ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
+    ,[Kotlin Flows](https://kotlinlang.org/docs/flow.html)
+    ,[Navigation](https://developer.android.com/jetpack/androidx/releases/navigation))
+  * [Android KTX](https://developer.android.com/kotlin/ktx) - Jetpack Kotlin extensions
+* UI
+  * Reactive UI
+  * [Jetpack Compose](https://developer.android.com/jetpack/compose) - modern, native UI kit
+  * [Material Design 3](https://m3.material.io/) - application design system providing UI components
+  * Theme selection
+    * [Dark Theme](https://material.io/develop/android/theming/dark) - dark theme for the app (Android 10+)
+    * [Dynamic Theming](https://m3.material.io/styles/color/dynamic-color/overview) - use generated, wallpaper-based theme (Android 12+)
+    * Theme generated via [Material Theme Builder](https://m3.material.io/theme-builder)
+* For Gradle dependency management, **buildSrc** approach is used with Kotlin DSL.
+
