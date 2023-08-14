@@ -122,14 +122,14 @@ We have following modules in our project. Among these modules, we have **Android
 ## Find this repository useful? Leave a Star ⭐
 Add this repository to your watchlist to get notified about the latest updates in the repository.
 
-## Future Work
+## Future Work ⏭️
 - v1.0 Multi-Module App with Ktor client and SqlDelight
 - v2.0 Unit Tests
 - v3.0 UI Tests
 - v4.0 Migrate to Koin to use DI in data & interactor/domain modules
 - v5.0 Pagination
 
-## Want to Contribute?
+## Want to Contribute? 🤝
 All contributions are welcomed. Feel free to open a Pull Request. This project is still in development. If you encounter any problems, please create an issue [here](https://github.com/shahzadansari/RickAndMorty/issues) & if you want to contribute to this project, PRs are welcomed! 🙂
 
 ## 👨‍💻 Developed By
