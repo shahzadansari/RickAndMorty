@@ -130,7 +130,7 @@ Add this repository to your watchlist to get notified about the latest updates i
 - v5.0 Pagination
 
 ## Want to Contribute? 🤝
-All contributions are welcomed. Feel free to open a Pull Request. This project is still in development. If you encounter any problems, please create an issue [here](https://github.com/shahzadansari/RickAndMorty/issues) & if you want to contribute to this project, PRs are welcomed! 🙂
+All contributions are welcomed. This project is still in development. If you encounter any problems, please create an issue [here](https://github.com/shahzadansari/RickAndMorty/issues) & if you want to contribute to this project, PRs are welcomed! 🙂
 
 ## 👨‍💻 Developed By
 
