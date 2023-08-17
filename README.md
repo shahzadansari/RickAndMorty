@@ -109,6 +109,20 @@ We have following modules in our project. Among these modules, we have **Android
     * Theme generated via [Material Theme Builder](https://m3.material.io/theme-builder)
 * For Gradle dependency management, **buildSrc** approach is used with Kotlin DSL.
 
+## Get Started
+
+There are a few ways to open this project.
+
+### Android Studio
+
+1. `Android Studio` -> `File` -> `New` -> `From Version control` -> `Git`
+2. Enter `https://github.com/shahzadansari/RickAndMorty.git` into URL field and press `Clone` button
+
+### Command-line And Android Studio
+
+1. Run `git clone https://github.com/shahzadansari/RickAndMorty.git` command to clone the project
+2. Open `Android Studio` and select `File | Open...` from the menu. Select the cloned directory and press `Open` button
+
 
 ## ⭐ Find this repository useful? Leave a Star
 Add this repository to your watchlist to get notified about the latest updates in the repository.
