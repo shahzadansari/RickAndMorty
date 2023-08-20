@@ -29,7 +29,7 @@ bin/
 gen/
 out/
 build/
-release/
+app/release/
 
 # Eclipse project files
 .classpath
