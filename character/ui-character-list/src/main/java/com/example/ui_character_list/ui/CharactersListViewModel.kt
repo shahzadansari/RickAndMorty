@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.character_interactors.GetCharacters
+import com.example.core.ApiException
 import com.example.core.DataState
 import com.example.core.Queue
 import com.example.core.UIComponent
@@ -34,15 +35,19 @@ class CharactersListViewModel @Inject constructor(
 
     private fun getCharacters() {
         viewModelScope.launch {
-            getCharacters.execute().collect { dataState ->
+            getCharacters.invoke().collect { dataState ->
                 state = state.copy(isLoading = dataState is DataState.Loading)
                 if (dataState is DataState.Success) {
                     state = state.copy(characters = dataState.data)
                 } else if (dataState is DataState.Error) {
+                    val errorDescription = when (dataState.cause) {
+                        is ApiException.HttpError -> "Characters not found. Code: ${dataState.cause.statusCode}"
+                        else -> dataState.cause.errorMsg
+                    }
                     appendToMessageQueue(
                         uiComponent = UIComponent.Dialog(
                             title = "Error",
-                            description = dataState.exception?.message
+                            description = errorDescription
                         )
                     )
                 }

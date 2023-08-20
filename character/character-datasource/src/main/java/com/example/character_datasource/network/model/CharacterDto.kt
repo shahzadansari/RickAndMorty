@@ -12,7 +12,9 @@ import kotlinx.serialization.Serializable
 data class GetCharactersDto(
     val info: InfoDto,
     val results: List<CharacterDto>
-)
+) {
+    val characters get() = this.results.map { it.toCharacter() }
+}
 
 @Serializable
 data class InfoDto(

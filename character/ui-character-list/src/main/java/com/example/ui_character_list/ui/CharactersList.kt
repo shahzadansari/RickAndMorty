@@ -19,7 +19,8 @@ fun CharactersList(
     DefaultScreenUI(
         isLoading = state.isLoading,
         errorQueue = state.errorQueue,
-        onRemoveHeadFromQueue = { onTriggerEvent(CharactersListEvent.RemoveHeadFromQueue) }
+        onRemoveHeadFromQueue = { onTriggerEvent(CharactersListEvent.RemoveHeadFromQueue) },
+        onErrorRetry = { onTriggerEvent(CharactersListEvent.GetAllCharacters) }
     ) {
         LazyColumn(
             modifier = Modifier.padding(vertical = 8.dp),
