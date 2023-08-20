@@ -7,3 +7,8 @@ java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
+
+dependencies {
+    implementation(KotlinX.jsonSerialization)
+    implementation(Ktor.core)
+}

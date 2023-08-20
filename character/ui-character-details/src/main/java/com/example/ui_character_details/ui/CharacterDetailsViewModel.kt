@@ -46,7 +46,7 @@ class CharacterDetailsViewModel @Inject constructor(
                     appendToMessageQueue(
                         uiComponent = UIComponent.Dialog(
                             title = "Error",
-                            description = dataState.exception?.message
+                            description = dataState.cause.errorMsg
                         )
                     )
                 }
