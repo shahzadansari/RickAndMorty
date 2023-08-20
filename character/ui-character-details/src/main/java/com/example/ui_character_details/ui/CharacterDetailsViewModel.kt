@@ -6,10 +6,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.character_interactors.GetCharacterFromCache
 import com.example.core.DataState
 import com.example.core.Queue
 import com.example.core.UIComponent
-import com.example.character_interactors.GetCharacterFromCache
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,7 +38,7 @@ class CharacterDetailsViewModel @Inject constructor(
 
     private fun getCharacterFromCache(id: Int) {
         viewModelScope.launch {
-            getCharacterFromCache.execute(id).collect { dataState ->
+            getCharacterFromCache.invoke(id).collect { dataState ->
                 state = state.copy(isLoading = dataState is DataState.Loading)
                 if (dataState is DataState.Success) {
                     state = state.copy(character = dataState.data)

@@ -13,7 +13,7 @@ class GetCharacters(
     private val cache: CharactersCache
 ) {
 
-    fun execute(): Flow<DataState<List<Character>>> = flow {
+    fun invoke(): Flow<DataState<List<Character>>> = flow {
         try {
             emit(DataState.Loading())
             val characters = mutableListOf<Character>()
@@ -41,12 +41,12 @@ class GetCharacters(
      * */
     private suspend fun getCharacters(service: CharactersService): DataState<List<Character>> {
         val characters = mutableListOf<Character>()
-        repeat(3) { page ->
-            val response = service.getCharacters(page)
-            if (response is DataState.Success) {
-                characters.addAll(response.data)
-            } else if (response is DataState.Error) {
-                return DataState.Error(response.cause)
+        repeat(3) { index ->
+            val dataState = service.getCharacters(index + 1)
+            if (dataState is DataState.Success) {
+                characters.addAll(dataState.data)
+            } else if (dataState is DataState.Error) {
+                return DataState.Error(dataState.cause)
             }
         }
         return DataState.Success(data = characters)

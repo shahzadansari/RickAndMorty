@@ -35,15 +35,14 @@ class CharactersListViewModel @Inject constructor(
 
     private fun getCharacters() {
         viewModelScope.launch {
-            getCharacters.execute().collect { dataState ->
+            getCharacters.invoke().collect { dataState ->
                 state = state.copy(isLoading = dataState is DataState.Loading)
                 if (dataState is DataState.Success) {
                     state = state.copy(characters = dataState.data)
                 } else if (dataState is DataState.Error) {
                     val errorDescription = when (dataState.cause) {
-                        is ApiException.Generic -> "Characters not found."
                         is ApiException.HttpError -> "Characters not found. Code: ${dataState.cause.statusCode}"
-                        ApiException.Network -> dataState.cause.errorMsg
+                        else -> dataState.cause.errorMsg
                     }
                     appendToMessageQueue(
                         uiComponent = UIComponent.Dialog(

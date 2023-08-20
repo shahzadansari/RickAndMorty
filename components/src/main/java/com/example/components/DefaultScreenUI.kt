@@ -16,6 +16,7 @@ fun DefaultScreenUI(
     isLoading: Boolean,
     errorQueue: Queue<UIComponent> = Queue(mutableListOf()),
     onRemoveHeadFromQueue: () -> Unit,
+    onErrorRetry: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
     Box(
@@ -30,9 +31,13 @@ fun DefaultScreenUI(
         if (errorQueue.isNotEmpty()) {
             errorQueue.peek()?.let { uiComponent ->
                 if (uiComponent is UIComponent.Dialog) {
-                    GenericDialog(
+                    GenericErrorDialog(
                         title = uiComponent.title,
                         description = uiComponent.description,
+                        onRetry = {
+                            onRemoveHeadFromQueue()
+                            onErrorRetry?.invoke()
+                        },
                         onDismiss = { onRemoveHeadFromQueue() }
                     )
                 }
