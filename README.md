@@ -128,11 +128,10 @@ There are a few ways to open this project.
 Add this repository to your watchlist to get notified about the latest updates in the repository.
 
 ## ⏭️ Future Work
-- v1.0 Multi-Module App with Ktor client and SqlDelight
-- v2.0 Unit Tests
-- v3.0 UI Tests
-- v4.0 Migrate to Koin to use DI in data & interactor/domain modules
-- v5.0 Pagination
+- v1.2 Migrate to Koin to use DI in data & interactor/domain modules
+- v1.3 Unit Tests
+- v1.4 UI Tests
+- v1.5 Pagination
 
 ## 🤝 Want to Contribute?
 All contributions are welcomed. This project is still in development. If you encounter any problems, please create an issue [here](https://github.com/shahzadansari/RickAndMorty/issues) & if you want to contribute to this project, PRs are welcomed! 🙂
