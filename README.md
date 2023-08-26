@@ -107,7 +107,7 @@ We have following modules in our project. Among these modules, we have **Android
     * [Dark Theme](https://material.io/develop/android/theming/dark) - dark theme for the app (Android 10+)
     * [Dynamic Theming](https://m3.material.io/styles/color/dynamic-color/overview) - use generated, wallpaper-based theme (Android 12+)
     * Theme generated via [Material Theme Builder](https://m3.material.io/theme-builder)
-* For Gradle dependency management, **buildSrc** approach is used with Kotlin DSL.
+* Gradle dependencies are managed using the [Version Catalog](https://developer.android.com/build/migrate-to-catalogs) approach.
 
 ## Get Started
 
