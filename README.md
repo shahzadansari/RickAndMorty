@@ -1,6 +1,6 @@
 # Rick & Morty App ✨
 
-This project demonstrates **Clean Architecure** best practices in a **Multi-Module** Android application using **MVI** architecture pattern. This app is made entirely in Kotlin and consumes pure Kotlin libraries to manage application data **(SqlDelight, Ktor)** and UI **(Jetpack Compose)**.
+This project demonstrates **Clean Architecture** best practices in a **Multi-Module** Android application using **MVI** architecture pattern. This app is made entirely in Kotlin and consumes pure Kotlin libraries to manage application data **(SqlDelight, Ktor)** and UI **(Jetpack Compose)**.
 
 ## 📷 Screenshots (Light & Dark Color Schemes)
 
