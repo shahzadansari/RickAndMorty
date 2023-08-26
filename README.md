@@ -95,9 +95,9 @@ We have following modules in our project. Among these modules, we have **Android
   * [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
   * MVI Architecture Pattern
   * [Android Architecture components](https://developer.android.com/topic/libraries/architecture)
-    ([ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
-    ,[Kotlin Flows](https://kotlinlang.org/docs/flow.html)
-    ,[Navigation](https://developer.android.com/jetpack/androidx/releases/navigation))
+    ([ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel),
+    [Kotlin Flows](https://kotlinlang.org/docs/flow.html),
+    [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation))
   * [Android KTX](https://developer.android.com/kotlin/ktx) - Jetpack Kotlin extensions
 * UI
   * Reactive UI
