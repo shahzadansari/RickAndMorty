@@ -1,6 +1,8 @@
+@file:Suppress("DSL_SCOPE_VIOLATION")
+
 plugins {
-    id(Plugins.moduleJavaLib)
-    id(Plugins.kotlinJvm)
+    id(libs.plugins.java.library.get().pluginId)
+    id(libs.plugins.kotlin.jvm.get().pluginId)
 }
 
 java {
@@ -9,9 +11,9 @@ java {
 }
 
 dependencies {
-    implementation(project(Modules.core))
-    implementation(project(Modules.characterDomain))
-    implementation(project(Modules.characterDataSource))
+    implementation(projects.core)
+    implementation(projects.character.characterDomain)
+    implementation(projects.character.characterDatasource)
 
-    implementation(KotlinX.coroutinesCore)
+    implementation(libs.kotlinx.coroutinesCore)
 }

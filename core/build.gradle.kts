@@ -1,6 +1,8 @@
+@file:Suppress("DSL_SCOPE_VIOLATION")
+
 plugins {
-    id(Plugins.moduleJavaLib)
-    id(Plugins.kotlinJvm)
+    id(libs.plugins.java.library.get().pluginId)
+    id(libs.plugins.kotlin.jvm.get().pluginId)
 }
 
 java {
@@ -9,6 +11,6 @@ java {
 }
 
 dependencies {
-    implementation(KotlinX.jsonSerialization)
-    implementation(Ktor.core)
+    implementation(libs.kotlinx.jsonSerialization)
+    implementation(libs.ktor.core)
 }

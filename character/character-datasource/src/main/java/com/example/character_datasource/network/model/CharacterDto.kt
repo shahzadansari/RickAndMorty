@@ -46,10 +46,10 @@ data class LocationDto(
 fun CharacterDto.toCharacter() = Character(
     id = id,
     name = name,
-    status = CharacterStatus.values().find { it.value == status } ?: CharacterStatus.Unknown,
+    status = CharacterStatus.entries.find { it.value == status } ?: CharacterStatus.Unknown,
     species = species,
     type = type,
-    gender = Gender.values().find { it.gender == gender } ?: Gender.Unknown,
+    gender = Gender.entries.find { it.gender == gender } ?: Gender.Unknown,
     origin = origin.toLocation(),
     location = location.toLocation(),
     imageUrl = imageUrl
