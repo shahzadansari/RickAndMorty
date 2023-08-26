@@ -24,3 +24,8 @@ include(":character:ui-character-details")
 include(":character:ui-character-list")
 include(":components")
 include(":core")
+
+// Generate type safe accessors when referring to other projects e.g.
+// Before -> implementation(project(":core"))
+// After -> implementation(projects.core)
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

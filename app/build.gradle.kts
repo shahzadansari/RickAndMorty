@@ -1,21 +1,22 @@
-@file:Suppress("UnstableApiUsage")
+@file:Suppress("UnstableApiUsage", "DSL_SCOPE_VIOLATION")
+
 plugins {
-    id(Plugins.moduleApp)
-    id(Plugins.hiltAndroid)
-    id(Plugins.kotlinAndroid)
-    id(Plugins.kotlinKapt)
+    id(libs.plugins.android.application.get().pluginId)
+    id(libs.plugins.hilt.get().pluginId)
+    id(libs.plugins.kotlin.android.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
 }
 
 android {
     namespace = "com.example.modularized_rickandmortyapp"
-    compileSdk = ProjectConfig.compileSdk
+    compileSdk = 34
 
     defaultConfig {
-        applicationId = ProjectConfig.applicationId
-        minSdk = ProjectConfig.minSdk
-        targetSdk = ProjectConfig.targetSdk
-        versionCode = ProjectConfig.versionCode
-        versionName = ProjectConfig.versionName
+        applicationId = "com.example.modularized_rickandmortyapp"
+        minSdk = 24
+        targetSdk = 33
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -40,7 +41,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = ProjectConfig.kotlinCompilerExtensionVersion
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
     packaging {
         resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -48,28 +49,20 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.core))
-    implementation(project(Modules.components))
-    implementation(project(Modules.character_ui_list))
-    implementation(project(Modules.character_ui_details))
-    implementation(project(Modules.characterInteractors))
-    implementation(project(Modules.characterDomain))
+    implementation(projects.core)
+    implementation(projects.components)
+    implementation(projects.character.uiCharacterList)
+    implementation(projects.character.uiCharacterDetails)
+    implementation(projects.character.characterInteractors)
+    implementation(projects.character.characterDomain)
 
-    implementation(AndroidX.coreKtx)
-    implementation(AndroidX.lifecycleRuntimeKtx)
-
-    implementation(Coil.coil)
-
-    implementation(platform(Compose.composeBom))
-    implementation(Compose.activity)
-    implementation(Compose.material3)
-    implementation(Compose.toolingPreview)
-    implementation(Compose.ui)
-    implementation(Compose.navigation)
-    implementation(Compose.hiltNavigation)
-
-    implementation(Hilt.hiltAndroid)
-    kapt(Hilt.hiltCompiler)
-
-    implementation(SqlDelight.androidDriver)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.bundles.compose)
+    implementation(libs.compose.navigation)
+    implementation(libs.coil)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation)
+    kapt(libs.hilt.compiler)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.sqldelight.androidDriver)
 }

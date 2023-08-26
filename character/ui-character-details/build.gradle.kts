@@ -1,18 +1,18 @@
-@file:Suppress("UnstableApiUsage")
+@file:Suppress("UnstableApiUsage", "DSL_SCOPE_VIOLATION")
 
 plugins {
-    id(Plugins.moduleLib)
-    id(Plugins.hiltAndroid)
-    id(Plugins.kotlinAndroid)
-    id(Plugins.kotlinKapt)
+    id(libs.plugins.android.library.get().pluginId)
+    id(libs.plugins.hilt.get().pluginId)
+    id(libs.plugins.kotlin.android.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
 }
 
 android {
     namespace = "com.example.modularized_rickandmortyapp.character.ui_character_details"
-    compileSdk = ProjectConfig.compileSdk
+    compileSdk = 34
 
     defaultConfig {
-        minSdk = ProjectConfig.minSdk
+        minSdk = 24
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -27,7 +27,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = ProjectConfig.kotlinCompilerExtensionVersion
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
     packaging {
         resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -35,22 +35,16 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.core))
-    implementation(project(Modules.components))
-    implementation(project(Modules.characterInteractors))
-    implementation(project(Modules.characterDomain))
+    implementation(projects.core)
+    implementation(projects.components)
+    implementation(projects.character.characterInteractors)
+    implementation(projects.character.characterDomain)
 
-    implementation(AndroidX.coreKtx)
-    implementation(AndroidX.lifecycleRuntimeKtx)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.bundles.compose)
+    implementation(libs.coil)
+    implementation(libs.lifecycle.runtime.ktx)
 
-    implementation(Coil.coil)
-
-    implementation(platform(Compose.composeBom))
-    implementation(Compose.activity)
-    implementation(Compose.material3)
-    implementation(Compose.toolingPreview)
-    implementation(Compose.ui)
-
-    implementation(Hilt.hiltAndroid)
-    kapt(Hilt.hiltCompiler)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }

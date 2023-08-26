@@ -1,15 +1,16 @@
-@file:Suppress("UnstableApiUsage")
+@file:Suppress("UnstableApiUsage", "DSL_SCOPE_VIOLATION")
+
 plugins {
-    id(Plugins.moduleLib)
-    id(Plugins.kotlinAndroid)
+    id(libs.plugins.android.library.get().pluginId)
+    id(libs.plugins.kotlin.android.get().pluginId)
 }
 
 android {
     namespace = "com.example.modularized_rickandmortyapp.components"
-    compileSdk = ProjectConfig.compileSdk
+    compileSdk = 34
 
     defaultConfig {
-        minSdk = ProjectConfig.minSdk
+        minSdk = 24
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -24,7 +25,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = ProjectConfig.kotlinCompilerExtensionVersion
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
     packaging {
         resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -32,15 +33,10 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.core))
-    implementation(project(Modules.characterDomain))
+    implementation(projects.core)
+    implementation(projects.character.characterDomain)
 
-    implementation(AndroidX.coreKtx)
-    implementation(AndroidX.lifecycleRuntimeKtx)
-
-    implementation(platform(Compose.composeBom))
-    implementation(Compose.activity)
-    implementation(Compose.material3)
-    implementation(Compose.toolingPreview)
-    implementation(Compose.ui)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.bundles.compose)
+    implementation(libs.lifecycle.runtime.ktx)
 }
