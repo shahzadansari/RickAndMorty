@@ -3,7 +3,6 @@ package com.example.modularized_rickandmortyapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
@@ -15,9 +14,8 @@ import com.example.ui_character_details.ui.CharacterDetails
 import com.example.ui_character_details.ui.CharacterDetailsViewModel
 import com.example.ui_character_list.ui.CharactersList
 import com.example.ui_character_list.ui.CharactersListViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.compose.getViewModel
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +39,7 @@ fun NavGraphBuilder.charactersListScreen(navController: NavController) {
     composable(
         route = Screen.CharactersList.route
     ) {
-        val viewModel: CharactersListViewModel = hiltViewModel()
+        val viewModel: CharactersListViewModel = getViewModel()
         CharactersList(
             state = viewModel.state,
             navigateToDetailScreen = { characterId ->
@@ -59,7 +57,7 @@ fun NavGraphBuilder.characterDetailsScreen() {
         route = Screen.CharacterDetails.route + "/{characterId}",
         arguments = Screen.CharacterDetails.arguments
     ) {
-        val viewModel: CharacterDetailsViewModel = hiltViewModel()
+        val viewModel: CharacterDetailsViewModel = getViewModel()
         CharacterDetails(
             state = viewModel.state,
             onTriggerEvent = {

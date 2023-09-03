@@ -15,5 +15,6 @@ dependencies {
     implementation(projects.character.characterDomain)
     implementation(projects.character.characterDatasource)
 
+    implementation(libs.koin.core)
     implementation(libs.kotlinx.coroutinesCore)
 }

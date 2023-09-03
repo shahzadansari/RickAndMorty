@@ -2,7 +2,6 @@
 
 plugins {
     id(libs.plugins.android.application.get().pluginId)
-    id(libs.plugins.hilt.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.kotlin.kapt.get().pluginId)
 }
@@ -60,9 +59,8 @@ dependencies {
     implementation(libs.bundles.compose)
     implementation(libs.compose.navigation)
     implementation(libs.coil)
-    implementation(libs.hilt.android)
-    implementation(libs.hilt.navigation)
-    kapt(libs.hilt.compiler)
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.sqldelight.androidDriver)
 }
