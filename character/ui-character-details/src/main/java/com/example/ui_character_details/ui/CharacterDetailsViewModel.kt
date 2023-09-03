@@ -10,12 +10,9 @@ import com.example.character_interactors.GetCharacterFromCache
 import com.example.core.DataState
 import com.example.core.Queue
 import com.example.core.UIComponent
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class CharacterDetailsViewModel @Inject constructor(
+class CharacterDetailsViewModel(
     private val getCharacterFromCache: GetCharacterFromCache,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {

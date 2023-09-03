@@ -17,6 +17,7 @@ dependencies {
     implementation(projects.character.characterDomain)
 
     implementation(libs.bundles.ktor)
+    implementation(libs.koin.core)
     implementation(libs.kotlinx.jsonSerialization)
     implementation(libs.sqldelight.runtime)
 }

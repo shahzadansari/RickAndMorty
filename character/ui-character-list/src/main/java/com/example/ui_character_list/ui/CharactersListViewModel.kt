@@ -10,14 +10,9 @@ import com.example.core.ApiException
 import com.example.core.DataState
 import com.example.core.Queue
 import com.example.core.UIComponent
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class CharactersListViewModel @Inject constructor(
-    private val getCharacters: GetCharacters
-) : ViewModel() {
+class CharactersListViewModel(private val getCharacters: GetCharacters) : ViewModel() {
 
     var state by mutableStateOf(CharactersListState())
         private set

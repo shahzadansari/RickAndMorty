@@ -8,9 +8,9 @@ composeMaterial3 = "1.1.1"
 composeNavigation = "2.7.1"
 coreKtx = "1.10.1"
 coroutinesCore = "1.7.1"
-hiltAndroid = "2.47"
-hiltNavigationCompose = "1.0.0"
 jsonSerialization = "1.5.1"
+koin = "3.4.3"
+koinCompose = "3.4.6"
 kotlin = "1.9.0"
 ktor = "2.3.1"
 lifecycleVmKtx = "2.6.1"
@@ -32,9 +32,9 @@ compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltAndroid" }
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koinCompose" }
 kotlinx-jsonSerialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "jsonSerialization" }
 kotlinx-coroutinesCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutinesCore" }
 ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
@@ -58,7 +58,6 @@ lifecycle = ["lifecycle-runtime-compose", "lifecycle-runtime-ktx", "lifecycle-vi
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 java-library = { id = "java-library" }
-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt" }

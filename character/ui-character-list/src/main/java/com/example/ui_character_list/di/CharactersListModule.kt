@@ -1,21 +1,9 @@
 package com.example.ui_character_list.di
 
-import com.example.character_interactors.CharacterInteractors
-import com.example.character_interactors.GetCharacters
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import com.example.ui_character_list.ui.CharactersListViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object CharactersListModule {
-
-    @Provides
-    @Singleton
-    fun provideGetCharactersInteractor(interactors: CharacterInteractors): GetCharacters {
-        return interactors.getCharacters
-    }
-
+val charactersListModule = module {
+    viewModel { CharactersListViewModel(get()) }
 }
