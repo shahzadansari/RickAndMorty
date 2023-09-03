@@ -1,6 +1,6 @@
 # Rick & Morty App ✨
 
-This project demonstrates **Clean Architecture** best practices in a **Multi-Module** Android application using **MVI** architecture pattern. This app is made entirely in Kotlin and consumes pure Kotlin libraries to manage application data **(SqlDelight, Ktor)** and UI **(Jetpack Compose)**. Dependency Injection is manaded via **Koin**.
+This project demonstrates **Clean Architecture** best practices in a **Multi-Module** Android application using **MVI** architecture pattern. This app is made entirely in Kotlin and consumes pure Kotlin libraries to manage application data **(SqlDelight, Ktor)** and UI **(Jetpack Compose)**. Dependency Injection is managed via **Koin**.
 
 ## 📷 Screenshots (Light & Dark Color Schemes)
 
@@ -88,9 +88,9 @@ We have following modules in our project. Among these modules, we have **Android
 * [Jetpack](https://developer.android.com/jetpack)
     * [Compose](https://developer.android.com/jetpack/compose) - modern, native UI kit
     * [Compose Navigation](https://developer.android.com/jetpack/compose/navigation) - in-app navigation
-  * [SqlDelight](https://cashapp.github.io/sqldelight/1.5.4/) - For local cache
-  * [Koin](https://insert-koin.io/) - dependency injection (dependency retrieval)
-  * [Coil](https://github.com/coil-kt/coil) - image loading library
+* [SqlDelight](https://cashapp.github.io/sqldelight/1.5.4/) - For local cache
+* [Koin](https://insert-koin.io/) - dependency injection (dependency retrieval)
+* [Coil](https://github.com/coil-kt/coil) - image loading library
 * Modern Architecture
   * [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
   * MVI Architecture Pattern
