@@ -1,6 +1,6 @@
 # Rick & Morty App ✨
 
-This project demonstrates **Clean Architecture** best practices in a **Multi-Module** Android application using **MVI** architecture pattern. This app is made entirely in Kotlin and consumes pure Kotlin libraries to manage application data **(SqlDelight, Ktor)** and UI **(Jetpack Compose)**.
+This project demonstrates **Clean Architecture** best practices in a **Multi-Module** Android application using **MVI** architecture pattern. This app is made entirely in Kotlin and consumes pure Kotlin libraries to manage application data **(SqlDelight, Ktor)** and UI **(Jetpack Compose)**. Dependency Injection is manaded via **Koin**.
 
 ## 📷 Screenshots (Light & Dark Color Schemes)
 
@@ -89,7 +89,7 @@ We have following modules in our project. Among these modules, we have **Android
     * [Compose](https://developer.android.com/jetpack/compose) - modern, native UI kit
     * [Compose Navigation](https://developer.android.com/jetpack/compose/navigation) - in-app navigation
   * [SqlDelight](https://cashapp.github.io/sqldelight/1.5.4/) - For local cache
-  * [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - dependency injection (dependency retrieval)
+  * [Koin](https://insert-koin.io/) - dependency injection (dependency retrieval)
   * [Coil](https://github.com/coil-kt/coil) - image loading library
 * Modern Architecture
   * [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
@@ -128,7 +128,6 @@ There are a few ways to open this project.
 Add this repository to your watchlist to get notified about the latest updates in the repository.
 
 ## ⏭️ Future Work
-- v1.2 Migrate to Koin to use DI in data & interactor/domain modules
 - v1.3 Unit Tests
 - v1.4 UI Tests
 - v1.5 Pagination
