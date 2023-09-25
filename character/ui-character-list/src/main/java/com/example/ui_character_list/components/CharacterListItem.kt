@@ -23,10 +23,11 @@ import com.example.modularized_rickandmortyapp.character.ui_character_list.R
 @Composable
 fun CharacterListItem(
     character: Character,
+    modifier: Modifier = Modifier,
     onCharacterSelected: (id: Int) -> Unit
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
             .clickable { onCharacterSelected(character.id) }
