@@ -6,12 +6,12 @@ import androidx.navigation.navArgument
 
 sealed class Screen(val route: String, val arguments: List<NamedNavArgument>) {
 
-    object CharactersList : Screen(
+    data object CharactersList : Screen(
         route = "charactersList",
         arguments = emptyList()
     )
 
-    object CharacterDetails : Screen(
+    data object CharacterDetails : Screen(
         route = "characterDetails",
         arguments = listOf(
             navArgument("characterId") {

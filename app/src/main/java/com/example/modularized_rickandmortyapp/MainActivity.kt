@@ -10,9 +10,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.components.theme.ModularizedRickAndMortyAppTheme
 import com.example.modularized_rickandmortyapp.ui.navigation.Screen
-import com.example.ui_character_details.ui.CharacterDetails
+import com.example.ui_character_details.ui.CharacterDetailsScreen
 import com.example.ui_character_details.ui.CharacterDetailsViewModel
-import com.example.ui_character_list.ui.CharactersList
+import com.example.ui_character_list.ui.CharactersListScreen
 import com.example.ui_character_list.ui.CharactersListViewModel
 import org.koin.androidx.compose.getViewModel
 
@@ -40,7 +40,7 @@ fun NavGraphBuilder.charactersListScreen(navController: NavController) {
         route = Screen.CharactersList.route
     ) {
         val viewModel: CharactersListViewModel = getViewModel()
-        CharactersList(
+        CharactersListScreen(
             state = viewModel.state,
             navigateToDetailScreen = { characterId ->
                 navController.navigate("${Screen.CharacterDetails.route}/$characterId")
@@ -58,7 +58,7 @@ fun NavGraphBuilder.characterDetailsScreen() {
         arguments = Screen.CharacterDetails.arguments
     ) {
         val viewModel: CharacterDetailsViewModel = getViewModel()
-        CharacterDetails(
+        CharacterDetailsScreen(
             state = viewModel.state,
             onTriggerEvent = {
                 viewModel.onTriggerEvent(it)

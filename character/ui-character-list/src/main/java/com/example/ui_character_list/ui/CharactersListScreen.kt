@@ -23,13 +23,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.character_domain.Character
 import com.example.components.DefaultScreenUI
 import com.example.ui_character_list.components.CharacterListItem
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CharactersList(
+fun CharactersListScreen(
     state: CharactersListState,
     navigateToDetailScreen: (characterId: Int) -> Unit,
     onTriggerEvent: (event: CharactersListEvent) -> Unit
@@ -53,8 +54,8 @@ fun CharactersList(
             ) {
                 items(
                     items = state.characters,
-                    key = {
-                        it.id
+                    key = { character: Character ->
+                        character.id
                     }
                 ) { character ->
                     CharacterListItem(

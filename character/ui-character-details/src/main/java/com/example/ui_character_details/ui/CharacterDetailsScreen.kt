@@ -24,7 +24,7 @@ import com.example.components.DefaultScreenUI
 import com.example.modularized_rickandmortyapp.character.ui_character_details.R
 
 @Composable
-fun CharacterDetails(
+fun CharacterDetailsScreen(
     state: CharacterDetailsState,
     onTriggerEvent: (event: CharacterDetailsEvent) -> Unit
 ) {
