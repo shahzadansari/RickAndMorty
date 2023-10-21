@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.components.DefaultScreenUI
-import com.example.modularized_rickandmortyapp.character.ui_character_details.R
+import com.example.modularized_rickandmortyapp.components.R as componentsR
 
 @Composable
 fun CharacterDetailsScreen(
@@ -48,8 +48,8 @@ fun CharacterDetailsScreen(
                     AsyncImage(
                         model = ImageRequest.Builder(LocalContext.current)
                             .data(character.imageUrl)
-                            .placeholder(R.drawable.white_background)
-                            .error(R.drawable.error_image)
+                            .placeholder(componentsR.drawable.white_background)
+                            .error(componentsR.drawable.error_image)
                             .crossfade(true)
                             .build(),
                         contentDescription = character.name,

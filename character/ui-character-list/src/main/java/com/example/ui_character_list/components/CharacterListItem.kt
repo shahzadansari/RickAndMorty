@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.character_domain.Character
-import com.example.modularized_rickandmortyapp.character.ui_character_list.R
+import com.example.modularized_rickandmortyapp.components.R as componentsR
 
 @Composable
 fun CharacterListItem(
@@ -39,13 +39,12 @@ fun CharacterListItem(
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(character.imageUrl)
-                    .placeholder(R.drawable.white_background)
-                    .error(R.drawable.error_image)
+                    .placeholder(componentsR.drawable.white_background)
+                    .error(componentsR.drawable.error_image)
                     .crossfade(true)
                     .build(),
                 contentDescription = character.name,
-                modifier = Modifier
-                    .size(50.dp)
+                modifier = Modifier.size(50.dp)
             )
             Spacer(modifier = Modifier.width(8.dp))
 
