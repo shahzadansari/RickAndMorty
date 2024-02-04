@@ -1,5 +1,6 @@
 package com.example.ui_character_details.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,10 +18,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.example.character_domain.Character
+import com.example.character_domain.example
 import com.example.components.DefaultScreenUI
+import com.example.components.isInPreview
 import com.example.modularized_rickandmortyapp.components.R as componentsR
 
 @Composable
@@ -45,19 +51,29 @@ fun CharacterDetailsScreen(
                         .fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
-                    AsyncImage(
-                        model = ImageRequest.Builder(LocalContext.current)
-                            .data(character.imageUrl)
-                            .placeholder(componentsR.drawable.white_background)
-                            .error(componentsR.drawable.error_image)
-                            .crossfade(true)
-                            .build(),
-                        contentDescription = character.name,
-                        modifier = Modifier
-                            .padding(top = 20.dp)
-                            .height(150.dp)
-                            .clip(CircleShape)
-                    )
+                    if (!isInPreview) {
+                        AsyncImage(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(character.imageUrl)
+                                .placeholder(componentsR.drawable.white_background)
+                                .error(componentsR.drawable.error_image)
+                                .crossfade(true)
+                                .build(),
+                            contentDescription = character.name,
+                            modifier = Modifier
+                                .padding(top = 20.dp)
+                                .height(150.dp)
+                                .clip(CircleShape)
+                        )
+                    } else {
+                        Image(
+                            painter = painterResource(id = componentsR.drawable.character_avatar),
+                            contentDescription = character.name,
+                            modifier = Modifier
+                                .padding(top = 20.dp)
+                                .clip(CircleShape)
+                        )
+                    }
                 }
 
                 Card(
@@ -85,4 +101,10 @@ fun CharacterDetailsScreen(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewCharacterDetailsScreen() {
+    CharacterDetailsScreen(state = CharacterDetailsState(character = Character.example), onTriggerEvent = {})
 }

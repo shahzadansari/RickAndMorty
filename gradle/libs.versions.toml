@@ -1,19 +1,20 @@
 [versions]
-androidGradlePlugin = "8.1.1"
+androidGradlePlugin = "8.2.2"
 appCompat = "1.6.1"
-coil = "2.4.0"
-composeActivity = "1.7.2"
-composeBom = "2023.08.00"
-composeMaterial3 = "1.1.1"
-composeNavigation = "2.7.1"
-coreKtx = "1.10.1"
-coroutinesCore = "1.7.1"
-jsonSerialization = "1.5.1"
+coil = "2.5.0"
+composeActivity = "1.8.2"
+composeBom = "2024.01.00"
+composeMaterial3 = "1.2.0-rc01"
+composeNavigation = "2.7.6"
+composeUiToolingPreview = "1.6.0"
+coreKtx = "1.12.0"
+coroutinesCore = "1.7.3"
+jsonSerialization = "1.6.2"
 koin = "3.4.3"
 koinCompose = "3.4.6"
-kotlin = "1.9.0"
-ktor = "2.3.1"
-lifecycleVmKtx = "2.6.1"
+kotlin = "1.9.22"
+ktor = "2.3.7"
+lifecycleVmKtx = "2.7.0"
 sqlDelight = "1.5.4"
 
 [libraries]
@@ -30,7 +31,7 @@ compose-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "composeUiToolingPreview" }
 compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
