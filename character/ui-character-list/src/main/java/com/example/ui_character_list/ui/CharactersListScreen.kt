@@ -22,8 +22,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.character_domain.Character
+import com.example.character_domain.example
 import com.example.components.DefaultScreenUI
 import com.example.ui_character_list.components.CharacterListItem
 import kotlinx.coroutines.launch
@@ -83,4 +85,15 @@ fun CharactersListScreen(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewCharactersListScreen() {
+    val characters = buildList {
+        repeat(100) {
+            add(Character.example.copy(id = it)) // Replacing "id" with current index as LazyColumn key { } requires a unique identifier for each item
+        }
+    }
+    CharactersListScreen(state = CharactersListState(characters = characters), navigateToDetailScreen = {}, onTriggerEvent = {})
 }

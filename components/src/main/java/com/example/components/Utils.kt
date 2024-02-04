@@ -1,12 +1,26 @@
 package com.example.components
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.dp
 
-fun Modifier.drawDebugBorder(color: Color = Color.Gray): Modifier = composed {
-    border(2.dp, color = color, shape = RectangleShape)
+@Stable
+val isInPreview @Composable get() = LocalInspectionMode.current
+
+inline fun Modifier.mapIf(predicate: Boolean, block: Modifier.() -> Modifier): Modifier {
+    return if (predicate) block() else this
 }
+
+fun Modifier.drawPreviewBorder(color: Color = Color.White): Modifier = composed {
+    mapIf(isInPreview) {
+        border(width = 1.dp, color = color, shape = RoundedCornerShape(8.dp))
+    }
+}
+
+val String.Companion.Empty inline get() = ""

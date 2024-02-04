@@ -10,7 +10,9 @@ data class Character(
     val origin: Location,
     val location: Location,
     val imageUrl: String
-)
+) {
+    companion object
+}
 
 enum class CharacterStatus(val value: String) {
     Alive("Alive"),
@@ -29,3 +31,17 @@ data class Location(
     val name: String,
     val url: String
 )
+
+val Character.Companion.example by lazy {
+    Character(
+        id = 1,
+        name = "Rick Sanchez",
+        status = CharacterStatus.Alive,
+        species = "Human",
+        type = "",
+        gender = Gender.Male,
+        origin = Location(name = "Earth (C-137) ", url = "https://rickandmortyapi.com/api/location/1"),
+        location = Location(name = "Citadel of Ricks", url = "https://rickandmortyapi.com/api/location/3"),
+        imageUrl = "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+    )
+}
