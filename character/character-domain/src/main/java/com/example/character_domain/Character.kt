@@ -34,14 +34,14 @@ data class Location(
 
 val Character.Companion.example by lazy {
     Character(
-        id = 1,
-        name = "Rick Sanchez",
-        status = CharacterStatus.Alive,
+        id = 11,
+        name = "Albert Einstein",
+        status = CharacterStatus.Dead,
         species = "Human",
         type = "",
         gender = Gender.Male,
         origin = Location(name = "Earth (C-137) ", url = "https://rickandmortyapi.com/api/location/1"),
-        location = Location(name = "Citadel of Ricks", url = "https://rickandmortyapi.com/api/location/3"),
-        imageUrl = "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+        location = Location(name = "Earth (Replacement Dimension)", url = "https://rickandmortyapi.com/api/location/20"),
+        imageUrl = "https://rickandmortyapi.com/api/character/avatar/11.jpeg"
     )
 }

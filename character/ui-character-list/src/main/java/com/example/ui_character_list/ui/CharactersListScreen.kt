@@ -1,8 +1,16 @@
 package com.example.ui_character_list.ui
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOut
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -48,28 +56,36 @@ fun CharactersListScreen(
         onErrorRetry = { onTriggerEvent(CharactersListEvent.GetAllCharacters) }
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-
-            LazyColumn(
-                modifier = Modifier.padding(vertical = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                state = lazyListState
+            AnimatedVisibility(
+                visible = state.characters.isNotEmpty(),
+                enter = slideInVertically { -it },
+                exit = slideOutVertically { -it },
+                label = "CharactersListAnimation"
             ) {
-                items(
-                    items = state.characters,
-                    key = { character: Character ->
-                        character.id
+                LazyColumn(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    state = lazyListState
+                ) {
+                    items(
+                        items = state.characters,
+                        key = { character: Character ->
+                            character.id
+                        }
+                    ) { character ->
+                        CharacterListItem(
+                            character = character,
+                            modifier = Modifier.animateItemPlacement(),
+                            onCharacterSelected = { navigateToDetailScreen(it) }
+                        )
                     }
-                ) { character ->
-                    CharacterListItem(
-                        character = character,
-                        modifier = Modifier.animateItemPlacement(),
-                        onCharacterSelected = { navigateToDetailScreen(it) }
-                    )
                 }
             }
             AnimatedVisibility(
                 visible = showScrollToTopFAB,
-                enter = scaleIn(), exit = scaleOut(),
+                enter = scaleIn(),
+                exit = scaleOut(),
+                label = "FABAnimation",
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(24.dp)

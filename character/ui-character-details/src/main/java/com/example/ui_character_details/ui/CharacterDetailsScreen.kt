@@ -1,5 +1,11 @@
 package com.example.ui_character_details.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,63 +45,70 @@ fun CharacterDetailsScreen(
         errorQueue = state.errorQueue,
         onRemoveHeadFromQueue = { onTriggerEvent(CharacterDetailsEvent.RemoveHeadFromQueue) }
     ) {
-        state.character?.let { character ->
-            Column(
-                modifier = Modifier
-                    .wrapContentHeight()
-                    .fillMaxWidth()
-            ) {
-                Box(
+        AnimatedVisibility(
+            visible = state.character != null,
+            enter = fadeIn(),
+            exit = fadeOut(),
+            label = "CharacterDetailsAnimation"
+        ) {
+            state.character?.let { character ->
+                Column(
                     modifier = Modifier
                         .wrapContentHeight()
-                        .fillMaxWidth(),
-                    contentAlignment = Alignment.Center
+                        .fillMaxWidth()
                 ) {
-                    if (!isInPreview) {
-                        AsyncImage(
-                            model = ImageRequest.Builder(LocalContext.current)
-                                .data(character.imageUrl)
-                                .placeholder(componentsR.drawable.white_background)
-                                .error(componentsR.drawable.error_image)
-                                .crossfade(true)
-                                .build(),
-                            contentDescription = character.name,
-                            modifier = Modifier
-                                .padding(top = 20.dp)
-                                .height(150.dp)
-                                .clip(CircleShape)
-                        )
-                    } else {
-                        Image(
-                            painter = painterResource(id = componentsR.drawable.character_avatar),
-                            contentDescription = character.name,
-                            modifier = Modifier
-                                .padding(top = 20.dp)
-                                .clip(CircleShape)
-                        )
-                    }
-                }
-
-                Card(
-                    modifier = Modifier
-                        .wrapContentSize()
-                        .padding(12.dp)
-                ) {
-                    Column(
+                    Box(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp)
+                            .wrapContentHeight()
+                            .fillMaxWidth(),
+                        contentAlignment = Alignment.Center
                     ) {
-                        Text(text = character.name, style = MaterialTheme.typography.headlineMedium)
-                        Spacer(modifier = Modifier.height(8.dp))
+                        if (!isInPreview) {
+                            AsyncImage(
+                                model = ImageRequest.Builder(LocalContext.current)
+                                    .data(character.imageUrl)
+                                    .placeholder(componentsR.drawable.white_background)
+                                    .error(componentsR.drawable.error_image)
+                                    .crossfade(true)
+                                    .build(),
+                                contentDescription = character.name,
+                                modifier = Modifier
+                                    .padding(top = 20.dp)
+                                    .height(150.dp)
+                                    .clip(CircleShape)
+                            )
+                        } else {
+                            Image(
+                                painter = painterResource(id = componentsR.drawable.character_avatar),
+                                contentDescription = character.name,
+                                modifier = Modifier
+                                    .padding(top = 20.dp)
+                                    .clip(CircleShape)
+                            )
+                        }
+                    }
 
-                        Text(text = "Status: ${character.status.name}", style = MaterialTheme.typography.bodyLarge)
-                        Spacer(modifier = Modifier.height(8.dp))
+                    Card(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .padding(12.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(8.dp)
+                        ) {
+                            Text(text = character.name, style = MaterialTheme.typography.headlineMedium)
+                            Spacer(modifier = Modifier.height(8.dp))
 
-                        Text(text = "Species: ${character.species}", style = MaterialTheme.typography.bodyLarge)
-                        Spacer(modifier = Modifier.height(8.dp))
+                            Text(text = "Status: ${character.status.name}", style = MaterialTheme.typography.bodyLarge)
+                            Spacer(modifier = Modifier.height(8.dp))
 
-                        Text(text = "Origin: ${character.origin.name}", style = MaterialTheme.typography.bodyLarge)
+                            Text(text = "Species: ${character.species}", style = MaterialTheme.typography.bodyLarge)
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            Text(text = "Origin: ${character.origin.name}", style = MaterialTheme.typography.bodyLarge)
+                        }
                     }
                 }
             }
