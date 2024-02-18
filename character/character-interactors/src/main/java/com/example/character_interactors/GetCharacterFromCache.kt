@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flow
 
 class GetCharacterFromCache(private val cache: CharactersCache) {
 
-    fun invoke(id: Int): Flow<DataState<Character>> = flow {
+    operator fun invoke(id: Int): Flow<DataState<Character>> = flow {
         val cachedCharacter = cache.getCharacter(id)
 
         if (cachedCharacter != null) {

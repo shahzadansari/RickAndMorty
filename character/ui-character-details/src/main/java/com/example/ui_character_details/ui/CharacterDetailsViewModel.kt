@@ -7,13 +7,16 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.character_interactors.GetCharacterFromCache
-import com.example.core.DataState
+import com.example.character_interactors.onError
+import com.example.character_interactors.onLoading
+import com.example.character_interactors.onSuccess
 import com.example.core.Queue
 import com.example.core.UIComponent
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CharacterDetailsViewModel(
-    private val getCharacterFromCache: GetCharacterFromCache,
+    private val getCharacterFromCacheUsecase: GetCharacterFromCache,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -35,19 +38,11 @@ class CharacterDetailsViewModel(
 
     private fun getCharacterFromCache(id: Int) {
         viewModelScope.launch {
-            getCharacterFromCache.invoke(id).collect { dataState ->
-                state = state.copy(isLoading = dataState is DataState.Loading)
-                if (dataState is DataState.Success) {
-                    state = state.copy(character = dataState.data)
-                } else if (dataState is DataState.Error) {
-                    appendToMessageQueue(
-                        uiComponent = UIComponent.Dialog(
-                            title = "Error",
-                            description = dataState.cause.errorMsg
-                        )
-                    )
-                }
-            }
+            getCharacterFromCacheUsecase(id)
+                .onLoading { state = state.copy(isLoading = it) }
+                .onSuccess { state = state.copy(character = it) }
+                .onError { appendToMessageQueue(uiComponent = UIComponent.Dialog(title = "Error", description = it.errorMsg)) }
+                .collect()
         }
     }
 

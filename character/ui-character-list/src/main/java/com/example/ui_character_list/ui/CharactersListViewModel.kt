@@ -6,13 +6,16 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.character_interactors.GetCharacters
+import com.example.character_interactors.onError
+import com.example.character_interactors.onLoading
+import com.example.character_interactors.onSuccess
 import com.example.core.ApiException
-import com.example.core.DataState
 import com.example.core.Queue
 import com.example.core.UIComponent
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class CharactersListViewModel(private val getCharacters: GetCharacters) : ViewModel() {
+class CharactersListViewModel(private val getCharactersUsecase: GetCharacters) : ViewModel() {
 
     var state by mutableStateOf(CharactersListState())
         private set
@@ -30,23 +33,17 @@ class CharactersListViewModel(private val getCharacters: GetCharacters) : ViewMo
 
     private fun getCharacters() {
         viewModelScope.launch {
-            getCharacters.invoke().collect { dataState ->
-                state = state.copy(isLoading = dataState is DataState.Loading)
-                if (dataState is DataState.Success) {
-                    state = state.copy(characters = dataState.data)
-                } else if (dataState is DataState.Error) {
-                    val errorDescription = when (dataState.cause) {
-                        is ApiException.HttpError -> "Characters not found. Code: ${dataState.cause.statusCode}"
-                        else -> dataState.cause.errorMsg
+            getCharactersUsecase()
+                .onLoading { state = state.copy(isLoading = it) }
+                .onSuccess { state = state.copy(characters = it) }
+                .onError {
+                    val errorDescription = when (it) {
+                        is ApiException.HttpError -> "Characters not found. Code: ${it.statusCode}"
+                        else -> it.errorMsg
                     }
-                    appendToMessageQueue(
-                        uiComponent = UIComponent.Dialog(
-                            title = "Error",
-                            description = errorDescription
-                        )
-                    )
+                    appendToMessageQueue(uiComponent = UIComponent.Dialog(title = "Error", description = errorDescription))
                 }
-            }
+                .collect()
         }
     }
 

@@ -11,7 +11,7 @@ class GetCharacters(
     private val cache: CharactersCache
 ) {
 
-    fun invoke() = flow<DataState<List<Character>>> {
+    operator fun invoke() = flow<DataState<List<Character>>> {
         val characters = mutableListOf<Character>()
 
         val dataState = getCharacters(service)

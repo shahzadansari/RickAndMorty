@@ -11,3 +11,20 @@ sealed class ApiException(open val statusCode: Int = -1, open val errorMsg: Stri
     data class HttpError(override val statusCode: Int, override val errorMsg: String = "Request could not be processed! Code :$statusCode") : ApiException(errorMsg = errorMsg)
     data object Network : ApiException(errorMsg = "Failed to connect. Please try again!")
 }
+
+/** Inspired by: https://getstream.io/blog/modeling-retrofit-responses/ */
+fun <T : Any> DataState<T>.onLoading(onLoading: (Boolean) -> Unit): DataState<T> = apply {
+    onLoading(this is DataState.Loading)
+}
+
+fun <T : Any> DataState<T>.onSuccess(onSuccess: (T) -> Unit): DataState<T> = apply {
+    if (this is DataState.Success) {
+        onSuccess(data)
+    }
+}
+
+fun <T : Any> DataState<T>.onError(onError: (ApiException) -> Unit): DataState<T> = apply {
+    if (this is DataState.Error) {
+        onError(cause)
+    }
+}
