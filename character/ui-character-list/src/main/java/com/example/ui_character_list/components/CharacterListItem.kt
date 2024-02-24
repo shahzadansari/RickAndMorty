@@ -2,10 +2,8 @@ package com.example.ui_character_list.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,14 +16,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.character_domain.Character
 import com.example.character_domain.example
+import com.example.components.Previews
 import com.example.components.isInPreview
-import com.example.modularized_rickandmortyapp.character.ui_character_list.R
+import com.example.components.theme.ModularizedRickAndMortyAppTheme
 import com.example.modularized_rickandmortyapp.components.R as componentsR
 
 @Composable
@@ -70,8 +68,10 @@ fun CharacterListItem(
     }
 }
 
-@Preview
+@Previews
 @Composable
 fun PreviewCharacterListItem() {
-    CharacterListItem(character = Character.example, onCharacterSelected = {})
+    ModularizedRickAndMortyAppTheme {
+        CharacterListItem(character = Character.example, onCharacterSelected = {})
+    }
 }
