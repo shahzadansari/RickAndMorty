@@ -1,11 +1,8 @@
 package com.example.ui_character_details.ui
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,14 +22,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.character_domain.Character
 import com.example.character_domain.example
 import com.example.components.DefaultScreenUI
+import com.example.components.Previews
 import com.example.components.isInPreview
+import com.example.components.theme.ModularizedRickAndMortyAppTheme
 import com.example.modularized_rickandmortyapp.components.R as componentsR
 
 @Composable
@@ -116,8 +114,10 @@ fun CharacterDetailsScreen(
     }
 }
 
-@Preview
+@Previews
 @Composable
 fun PreviewCharacterDetailsScreen() {
-    CharacterDetailsScreen(state = CharacterDetailsState(character = Character.example), onTriggerEvent = {})
+    ModularizedRickAndMortyAppTheme {
+        CharacterDetailsScreen(state = CharacterDetailsState(character = Character.example), onTriggerEvent = {})
+    }
 }
