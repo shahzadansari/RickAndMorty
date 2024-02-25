@@ -1,6 +1,6 @@
 # Rick & Morty App ✨
 
-This project demonstrates **Clean Architecture** best practices in a **Multi-Module** Android application using **MVI** architecture pattern. This app is made entirely in Kotlin and consumes pure Kotlin libraries to manage application data **(SqlDelight, Ktor)** and UI **(Jetpack Compose)**. Dependency Injection is managed via **Koin**.
+This project demonstrates **Modern App Architecture** best practices in a **Multi-Module** Android application using **MVI** architecture pattern. This app is made entirely in Kotlin and consumes pure Kotlin libraries to manage application data **(SqlDelight, Ktor)** and UI **(Jetpack Compose)**. Dependency Injection is managed via **Koin**.
 
 ## 📷 Screenshots (Light & Dark Color Schemes)
 
@@ -92,7 +92,6 @@ We have following modules in our project. Among these modules, we have **Android
 * [Koin](https://insert-koin.io/) - dependency injection (dependency retrieval)
 * [Coil](https://github.com/coil-kt/coil) - image loading library
 * Modern Architecture
-  * [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
   * MVI Architecture Pattern
   * [Android Architecture components](https://developer.android.com/topic/libraries/architecture)
     ([ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel),
@@ -128,9 +127,9 @@ There are a few ways to open this project.
 Add this repository to your watchlist to get notified about the latest updates in the repository.
 
 ## ⏭️ Future Work
-- v1.3 Unit Tests
-- v1.4 UI Tests
-- v1.5 Pagination
+- v1.4 Unit Tests
+- v1.5 UI Tests
+- v1.6 Pagination
 
 ## 🤝 Want to Contribute?
 All contributions are welcomed. This project is still in development. If you encounter any problems, please create an issue [here](https://github.com/shahzadansari/RickAndMorty/issues) & if you want to contribute to this project, PRs are welcomed! 🙂
