@@ -1,14 +1,14 @@
 package com.example.character_interactors
 
-import com.example.character_datasource.cache.CharactersCache
-import com.example.character_datasource.network.CharactersService
+import com.example.character_datasource.cache.CharactersLocal
+import com.example.character_datasource.network.CharactersRemote
 import com.example.character_domain.Character
 import com.example.core.DataState
 import kotlinx.coroutines.flow.flow
 
 class GetCharacters(
-    private val service: CharactersService,
-    private val cache: CharactersCache
+    private val service: CharactersRemote,
+    private val cache: CharactersLocal
 ) {
 
     operator fun invoke() = flow<DataState<List<Character>>> {
@@ -32,7 +32,7 @@ class GetCharacters(
     /**
      * getCharacters() method returns 60 characters from API. This API automatically limits each API response to 20 characters only and since pagination is not in place yet, this method loads characters till page 3.
      * */
-    private suspend fun getCharacters(service: CharactersService): DataState<List<Character>> {
+    private suspend fun getCharacters(service: CharactersRemote): DataState<List<Character>> {
         val characters = mutableListOf<Character>()
         repeat(3) { index ->
             val dataState = service.getCharacters(index + 1)

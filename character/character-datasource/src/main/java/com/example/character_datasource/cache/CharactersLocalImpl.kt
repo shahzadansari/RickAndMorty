@@ -3,9 +3,9 @@ package com.example.character_datasource.cache
 import com.example.character_datasource.cache.model.toCharacter
 import com.example.character_domain.Character
 
-class CharactersCacheImpl(
+class CharactersLocalImpl(
     charactersDb: CharactersDatabase
-) : CharactersCache {
+) : CharactersLocal {
 
     private val queries = charactersDb.charactersDbQueries
 

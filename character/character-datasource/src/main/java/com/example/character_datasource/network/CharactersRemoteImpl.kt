@@ -10,7 +10,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.parameter
 import io.ktor.client.request.url
 
-class CharactersServiceImpl(private val httpClient: HttpClient) : CharactersService {
+class CharactersRemoteImpl(private val httpClient: HttpClient) : CharactersRemote {
 
     override suspend fun getCharacters(page: Int): DataState<List<Character>> {
         val response = httpClient.safeRequest<GetCharactersDto> {

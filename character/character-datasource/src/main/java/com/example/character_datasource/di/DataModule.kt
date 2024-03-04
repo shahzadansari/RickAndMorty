@@ -1,10 +1,10 @@
 package com.example.character_datasource.di
 
-import com.example.character_datasource.cache.CharactersCache
-import com.example.character_datasource.cache.CharactersCacheImpl
+import com.example.character_datasource.cache.CharactersLocal
+import com.example.character_datasource.cache.CharactersLocalImpl
 import com.example.character_datasource.cache.CharactersDatabase
-import com.example.character_datasource.network.CharactersService
-import com.example.character_datasource.network.CharactersServiceImpl
+import com.example.character_datasource.network.CharactersRemote
+import com.example.character_datasource.network.CharactersRemoteImpl
 import com.example.core.HttpExceptions
 import com.example.core.toApiException
 import io.ktor.client.HttpClient
@@ -24,14 +24,14 @@ import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 
 val dataModule = module {
-    single<CharactersService> {
-        CharactersServiceImpl(get())
+    single<CharactersRemote> {
+        CharactersRemoteImpl(get())
     }
     single {
         CharactersDatabase(get())
     }
-    single<CharactersCache> {
-        CharactersCacheImpl(get())
+    single<CharactersLocal> {
+        CharactersLocalImpl(get())
     }
 
     single {

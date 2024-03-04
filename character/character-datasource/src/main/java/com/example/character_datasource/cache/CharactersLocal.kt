@@ -2,7 +2,7 @@ package com.example.character_datasource.cache
 
 import com.example.character_domain.Character
 
-interface CharactersCache {
+interface CharactersLocal {
 
     suspend fun getAllCharacters(): List<Character>
 
