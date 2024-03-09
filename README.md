@@ -60,17 +60,17 @@ This app has two screens:
 <img width="530" alt="character-details-arch" src="/screenshots/character-details-arch.png">
 
 ## 📦 Modularization Overview
-We have following modules in our project. Among these modules, we have **Android Application** module, **Android Library** modules & pure **Java/Kotlin Library** modules. I have preferred using pure Kotlin libraries in domain & data layers as they can easily be reused in Kotlin Multiplatform projects. Therefore, **SqlDelight** is preferred over **Room** & **Ktor client** is used instead of **Retrofit**.
+We have following modules in our project. Among these modules, we have **Android Application** module, **Android Library** modules & pure **Kotlin Library** modules. I have preferred using pure Kotlin libraries in domain & data layers as they can easily be reused in Kotlin Multiplatform projects. Therefore, **SqlDelight** is preferred over **Room** & **Ktor client** is used instead of **Retrofit**.
 
 
 
 | Module name                                 | Type                   | Description                                                                                                                          |
 | -------------                               | -------------          | -------------                                                                                                                        |
 | app                                         | Android Application    | Brings everything together required for the app to function correctly. This includes UI scaffolding and navigation.                  |
-| core                                        | Java/Kotlin Library    | Core business models and classes (such as DataState/Result wrapper classes) that are used by multiple modules.                       |
-| character-datasource                        | Java/Kotlin Library    | Contains data-sources and private models such as `CharacterDto` & `CharacterEntity` (network and cache) for the characters module.   |
-| character-domain                            | Java/Kotlin Library    | Domain models and classes for the characters module i.e. data class `Character`                                                      |
-| character-interactors                       | Java/Kotlin Library    | Use-cases for the characters Module.                                                                                                 |
+| core                                        | Kotlin Library    | Core business models and classes (such as DataState/Result wrapper classes) that are used by multiple modules.                       |
+| character-datasource                        | Kotlin Library    | Contains data-sources and private models such as `CharacterDto` & `CharacterEntity` (network and cache) for the characters module.   |
+| character-domain                            | Kotlin Library    | Domain models and classes for the characters module i.e. data class `Character`                                                      |
+| character-interactors                       | Kotlin Library    | Use-cases for the characters Module.                                                                                                 |
 | ui-character-list                           | Android Library        | UI components for the CharactersList screen.                                                                                         |
 | ui-character-details                        | Android Library        | UI components for the CharacterDetails screen.                                                                                       |
 | components                                  | Android Library        | Common Composables.                                                                                                                  ||
