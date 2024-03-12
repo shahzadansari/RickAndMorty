@@ -57,13 +57,33 @@ fun CharactersListScreen(
                 exit = slideOutVertically { -it },
                 label = "CharactersListAnimation"
             ) {
+                val statusFilterStates = rememberStatusFilterStates()
+                val statusFilters = statusFilterStates.toList().map { it.label }
+
+                val genderFilterStates = rememberGenderFilterStates()
+                val genderFilters = genderFilterStates.toList().map { it.label }
+
+                val filteredCharacters = state.characters
+                    .filter { character ->
+                        statusFilters.contains(character.status.name)
+                    }.filter { character ->
+                        genderFilters.contains(character.gender.name)
+                    }
+
                 LazyColumn(
                     modifier = Modifier.padding(vertical = 8.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                     state = lazyListState
                 ) {
+                    item {
+                        FilterChipsRow(filterStates = statusFilterStates)
+                    }
+                    item {
+                        FilterChipsRow(filterStates = genderFilterStates)
+                    }
+
                     items(
-                        items = state.characters,
+                        items = filteredCharacters,
                         key = { character: Character ->
                             character.id
                         }

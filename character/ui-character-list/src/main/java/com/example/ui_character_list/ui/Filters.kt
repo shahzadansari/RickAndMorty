@@ -23,7 +23,6 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.character_domain.Character
 import com.example.character_domain.CharacterStatus
@@ -57,7 +56,7 @@ fun rememberGenderFilterStates() = remember {
 }
 
 @Composable
-fun FilterChipSample(filterStates: SnapshotStateList<FilterChipState>) {
+fun FilterChipsRow(filterStates: SnapshotStateList<FilterChipState>) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -86,7 +85,7 @@ fun FilterChipSample(filterStates: SnapshotStateList<FilterChipState>) {
 
 @Previews
 @Composable
-private fun FilterChipSamplePreview() {
+private fun FilterChipsRowPreview() {
     ModularizedRickAndMortyAppTheme {
         val statusFilterStates = rememberStatusFilterStates()
         val statusFilters = statusFilterStates.toList()
@@ -108,18 +107,34 @@ private fun FilterChipSamplePreview() {
                 }
             }
 
+        val filteredCharacters = characters.apply {
+            filter { character ->
+                statusFilters.any { chipState ->
+                    chipState.selected.value && chipState.label == character.status.name
+                }
+            }
+            filter { character ->
+                genderFilters.any { chipState ->
+                    chipState.selected.value && chipState.label == character.gender.name
+                }
+            }
+        }
+
         Column(
             modifier = Modifier
                 .background(Color.White)
                 .padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            FilterChipSample(filterStates = statusFilterStates)
-            FilterChipSample(filterStates = genderFilterStates)
+            FilterChipsRow(filterStates = statusFilterStates)
+            FilterChipsRow(filterStates = genderFilterStates)
 
             Text(text = "Total: ${characters.size}")
             Text(text = "Status filtered: ${statusFilteredList.size}")
             Text(text = "Gender filtered: ${genderFilteredList.size}")
+
+            // TODO: Investigate why filters list is not getting updated
+            Text(text = "Status filters: ${statusFilterStates.toList().map { it.label }}")
         }
     }
 }
