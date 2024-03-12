@@ -58,10 +58,10 @@ fun CharactersListScreen(
                 label = "CharactersListAnimation"
             ) {
                 val statusFilterStates = rememberStatusFilterStates()
-                val statusFilters = statusFilterStates.toList().map { it.label }
+                val statusFilters = statusFilterStates.toList().filter { it.selected.value }.map { it.label }
 
                 val genderFilterStates = rememberGenderFilterStates()
-                val genderFilters = genderFilterStates.toList().map { it.label }
+                val genderFilters = genderFilterStates.toList().filter { it.selected.value }.map { it.label }
 
                 val filteredCharacters = state.characters
                     .filter { character ->
@@ -75,6 +75,8 @@ fun CharactersListScreen(
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                     state = lazyListState
                 ) {
+                    // TODO: 1. Add "No Characters" state when list is empty
+                    // TODO: 2. Move Chips to BottomSheet
                     item {
                         FilterChipsRow(filterStates = statusFilterStates)
                     }

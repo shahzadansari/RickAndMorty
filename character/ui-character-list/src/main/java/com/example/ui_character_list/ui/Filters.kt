@@ -88,37 +88,25 @@ fun FilterChipsRow(filterStates: SnapshotStateList<FilterChipState>) {
 private fun FilterChipsRowPreview() {
     ModularizedRickAndMortyAppTheme {
         val statusFilterStates = rememberStatusFilterStates()
-        val statusFilters = statusFilterStates.toList()
+        val statusFilters = statusFilterStates.toList().filter { it.selected.value }.map { it.label }
 
         val genderFilterStates = rememberGenderFilterStates()
-        val genderFilters = genderFilterStates.toList()
+        val genderFilters = genderFilterStates.toList().filter { it.selected.value }.map { it.label }
 
-        val statusFilteredList = characters
-            .filter { character ->
-                statusFilters.any { chipState ->
-                    chipState.selected.value && chipState.label == character.status.name
-                }
-            }
-
-        val genderFilteredList = characters
-            .filter { character ->
-                genderFilters.any { chipState ->
-                    chipState.selected.value && chipState.label == character.gender.name
-                }
-            }
-
-        val filteredCharacters = characters.apply {
-            filter { character ->
-                statusFilters.any { chipState ->
-                    chipState.selected.value && chipState.label == character.status.name
-                }
-            }
-            filter { character ->
-                genderFilters.any { chipState ->
-                    chipState.selected.value && chipState.label == character.gender.name
-                }
-            }
+        val statusFilteredList = characters.filter { character ->
+            statusFilters.contains(character.status.name)
         }
+
+        val genderFilteredList = characters.filter { character ->
+            genderFilters.contains(character.gender.name)
+        }
+
+        val filteredCharacters = characters
+            .filter { character ->
+                statusFilters.contains(character.status.name)
+            }.filter { character ->
+                genderFilters.contains(character.gender.name)
+            }
 
         Column(
             modifier = Modifier
@@ -130,11 +118,12 @@ private fun FilterChipsRowPreview() {
             FilterChipsRow(filterStates = genderFilterStates)
 
             Text(text = "Total: ${characters.size}")
+            Text(text = "Filtered: ${filteredCharacters.size}")
             Text(text = "Status filtered: ${statusFilteredList.size}")
             Text(text = "Gender filtered: ${genderFilteredList.size}")
 
-            // TODO: Investigate why filters list is not getting updated
-            Text(text = "Status filters: ${statusFilterStates.toList().map { it.label }}")
+            Text(text = "Status filters: $statusFilters")
+            Text(text = "Gender filters: $genderFilters")
         }
     }
 }
