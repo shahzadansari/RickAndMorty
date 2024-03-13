@@ -1,4 +1,4 @@
-package com.example.ui_character_list.ui
+package com.example.ui_character_list.ui.components
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
@@ -38,7 +38,7 @@ data class FilterChipState(
 )
 
 @Composable
-fun rememberStatusFilterStates() = remember {
+fun rememberStatusFilterState() = remember {
     CharacterStatus.entries
         .map { characterStatus ->
             FilterChipState(label = characterStatus.name)
@@ -47,7 +47,7 @@ fun rememberStatusFilterStates() = remember {
 }
 
 @Composable
-fun rememberGenderFilterStates() = remember {
+fun rememberGenderFilterState() = remember {
     Gender.entries
         .map { characterStatus ->
             FilterChipState(label = characterStatus.name)
@@ -87,10 +87,10 @@ fun FilterChipsRow(filterStates: SnapshotStateList<FilterChipState>) {
 @Composable
 private fun FilterChipsRowPreview() {
     ModularizedRickAndMortyAppTheme {
-        val statusFilterStates = rememberStatusFilterStates()
+        val statusFilterStates = rememberStatusFilterState()
         val statusFilters = statusFilterStates.toList().filter { it.selected.value }.map { it.label }
 
-        val genderFilterStates = rememberGenderFilterStates()
+        val genderFilterStates = rememberGenderFilterState()
         val genderFilters = genderFilterStates.toList().filter { it.selected.value }.map { it.label }
 
         val statusFilteredList = characters.filter { character ->
