@@ -39,4 +39,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.bundles.compose)
     implementation(libs.lifecycle.runtime.ktx)
+
+    lintChecks(libs.compose.lint.checks)
 }
