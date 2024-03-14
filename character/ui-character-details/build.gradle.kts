@@ -44,4 +44,6 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.koin.android)
     implementation(libs.lifecycle.runtime.ktx)
+
+    lintChecks(libs.compose.lint.checks)
 }
