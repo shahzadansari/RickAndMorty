@@ -43,7 +43,9 @@ fun NavGraphBuilder.charactersListScreen(navController: NavController) {
         CharactersListScreen(
             state = viewModel.state,
             navigateToDetailScreen = { characterId ->
-                navController.navigate("${Screen.CharacterDetails.route}/$characterId")
+                navController.navigate("${Screen.CharacterDetails.route}/$characterId") {
+                    launchSingleTop = true
+                }
             },
             onTriggerEvent = {
                 viewModel.onTriggerEvent(it)
