@@ -63,4 +63,6 @@ dependencies {
     implementation(libs.koin.compose)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.sqldelight.androidDriver)
+
+    lintChecks(libs.compose.lint.checks)
 }

@@ -1,5 +1,6 @@
 package com.example.ui_character_list.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
@@ -47,6 +48,7 @@ import kotlinx.coroutines.launch
 // TODO: 5. Add clarifying text in Bottom Sheet content
 // TODO: 6. Add Preview states for Expanded and PartiallyExpanded sheet
 
+@SuppressLint("ComposeModifierMissing")
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun CharactersListScreen(
@@ -148,7 +150,7 @@ fun CharactersListScreen(
 
 @Previews
 @Composable
-fun PreviewCharactersListScreen() {
+private fun PreviewCharactersListScreen() {
     val characters = buildList {
         repeat(100) {
             add(Character.example.copy(id = it)) // Replacing "id" with current index as LazyColumn key { } requires a unique identifier for each item

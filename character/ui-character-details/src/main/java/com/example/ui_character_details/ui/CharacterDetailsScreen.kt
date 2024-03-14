@@ -1,5 +1,6 @@
 package com.example.ui_character_details.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -33,6 +34,7 @@ import com.example.components.isInPreview
 import com.example.components.theme.ModularizedRickAndMortyAppTheme
 import com.example.modularized_rickandmortyapp.components.R as componentsR
 
+@SuppressLint("ComposeModifierMissing")
 @Composable
 fun CharacterDetailsScreen(
     state: CharacterDetailsState,
@@ -116,7 +118,7 @@ fun CharacterDetailsScreen(
 
 @Previews
 @Composable
-fun PreviewCharacterDetailsScreen() {
+private fun PreviewCharacterDetailsScreen() {
     ModularizedRickAndMortyAppTheme {
         CharacterDetailsScreen(state = CharacterDetailsState(character = Character.example), onTriggerEvent = {})
     }
