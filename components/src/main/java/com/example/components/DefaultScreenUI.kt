@@ -1,5 +1,6 @@
 package com.example.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.core.Queue
 import com.example.core.UIComponent
 
+@SuppressLint("ComposeModifierMissing", "ComposeParameterOrder")
 @Composable
 fun DefaultScreenUI(
     isLoading: Boolean,
@@ -49,7 +51,7 @@ fun DefaultScreenUI(
 
 @Preview
 @Composable
-fun PreviewDefaultScreenUI() {
+private fun PreviewDefaultScreenUI() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         DefaultScreenUI(isLoading = true, onRemoveHeadFromQueue = {}, onErrorRetry = {}, content = {})
     }

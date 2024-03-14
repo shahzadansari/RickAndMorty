@@ -1,5 +1,6 @@
 package com.example.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -17,8 +18,10 @@ inline fun Modifier.mapIf(predicate: Boolean, block: Modifier.() -> Modifier): M
     return if (predicate) block() else this
 }
 
-fun Modifier.drawPreviewBorder(color: Color = Color.White): Modifier = composed {
-    mapIf(isInPreview) {
+@SuppressLint("ComposeComposableModifier, ComposeModifierWithoutDefault")
+@Composable
+fun Modifier.drawPreviewBorder(color: Color = Color.White): Modifier {
+    return this then Modifier.mapIf(isInPreview) {
         border(width = 1.dp, color = color, shape = RoundedCornerShape(8.dp))
     }
 }

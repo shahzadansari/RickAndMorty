@@ -1,5 +1,6 @@
 package com.example.ui_character_list.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
@@ -33,6 +34,7 @@ import com.example.components.theme.ModularizedRickAndMortyAppTheme
 import com.example.ui_character_list.components.CharacterListItem
 import kotlinx.coroutines.launch
 
+@SuppressLint("ComposeModifierMissing")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CharactersListScreen(
@@ -100,7 +102,7 @@ fun CharactersListScreen(
 
 @Previews
 @Composable
-fun PreviewCharactersListScreen() {
+private fun PreviewCharactersListScreen() {
     val characters = buildList {
         repeat(100) {
             add(Character.example.copy(id = it)) // Replacing "id" with current index as LazyColumn key { } requires a unique identifier for each item
