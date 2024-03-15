@@ -46,8 +46,6 @@ import com.example.components.Previews
 import com.example.components.theme.ModularizedRickAndMortyAppTheme
 import com.example.ui_character_list.components.CharacterListItem
 import com.example.ui_character_list.ui.components.FilterChipsRow
-import com.example.ui_character_list.ui.components.rememberGenderFilterState
-import com.example.ui_character_list.ui.components.rememberStatusFilterState
 import kotlinx.coroutines.launch
 
 // TODO: 1. Add "No Characters found" state ✅
@@ -56,7 +54,7 @@ import kotlinx.coroutines.launch
 // TODO: 4. Use FlowRow() for filters
 // TODO: 5. Add clarifying text in Bottom Sheet content
 // TODO: 6. Add Preview states for Expanded and PartiallyExpanded sheet
-// TODO: 7. Filter characters in ViewModel to adhere to Single Source-Of-Truth principle
+// TODO: 7. Filter characters in ViewModel to adhere to Single Source-Of-Truth principle ✅
 
 @SuppressLint("ComposeModifierMissing")
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
@@ -71,8 +69,6 @@ fun CharactersListScreen(
     val showScrollToTopFAB by remember { derivedStateOf { lazyListState.firstVisibleItemIndex > 3 } }
 
     val scaffoldState = rememberBottomSheetScaffoldState()
-    val statusFilterState = rememberStatusFilterState()
-    val genderFilterState = rememberGenderFilterState()
 
     var enableBottomSheet by rememberSaveable { mutableStateOf(false) }
     val animatedSheetPeekHeight by animateDpAsState(
@@ -85,9 +81,19 @@ fun CharactersListScreen(
     )
 
     LaunchedEffect(state) {
-        if (!state.isLoading && state.characters.isNotEmpty()) {
+        if (!state.isLoading && state.unfilteredCharacters.isNotEmpty()) {
             enableBottomSheet = true
         }
+    }
+
+    val statusFilters = remember(state) { state.statusFilters }
+    val genderFilters = remember(state) { state.genderFilters }
+
+    LaunchedEffect(
+        key1 = statusFilters.toList().map { it.selected.value },
+        key2 = genderFilters.toList().map { it.selected.value },
+    ) {
+        onTriggerEvent(CharactersListEvent.FilterCharacters)
     }
 
     DefaultScreenUI(
@@ -104,8 +110,8 @@ fun CharactersListScreen(
                     modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 24.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    FilterChipsRow(filterStates = statusFilterState)
-                    FilterChipsRow(filterStates = genderFilterState)
+                    FilterChipsRow(filterStates = statusFilters)
+                    FilterChipsRow(filterStates = genderFilters)
                 }
             },
             content = { paddingValues ->
@@ -114,19 +120,8 @@ fun CharactersListScreen(
                         .fillMaxSize()
                         .padding(paddingValues)
                 ) {
-                    val statusFilters = statusFilterState.toList().filter { it.selected.value }.map { it.label }
-                    val genderFilters = genderFilterState.toList().filter { it.selected.value }.map { it.label }
-
-                    val filteredCharacters = state.characters
-                        .filter { character ->
-                            statusFilters.contains(character.status.name)
-                        }.filter { character ->
-                            genderFilters.contains(character.gender.name)
-                        }
-
                     AnimatedVisibility(
-                        visible = filteredCharacters.isNotEmpty(),
-                        modifier = Modifier.align(Alignment.Center),
+                        visible = state.characters.isNotEmpty(),
                         enter = slideInVertically(),
                         exit = slideOutVertically()
                     ) {
@@ -136,7 +131,7 @@ fun CharactersListScreen(
                             state = lazyListState
                         ) {
                             items(
-                                items = filteredCharacters,
+                                items = state.characters,
                                 key = { character: Character ->
                                     character.id
                                 }
@@ -150,9 +145,8 @@ fun CharactersListScreen(
                         }
                     }
 
-                    val hasNoCharacters = state.characters.isEmpty() || filteredCharacters.isEmpty()
                     AnimatedVisibility(
-                        visible = !state.isLoading && hasNoCharacters,
+                        visible = !state.isLoading && state.characters.isEmpty(),
                         modifier = Modifier.align(Alignment.Center),
                         enter = scaleIn(),
                         exit = scaleOut(animationSpec = snap())
@@ -193,6 +187,6 @@ private fun PreviewCharactersListScreen() {
         }
     }
     ModularizedRickAndMortyAppTheme {
-        CharactersListScreen(state = CharactersListState(characters = characters), navigateToDetailScreen = {}, onTriggerEvent = {})
+        CharactersListScreen(state = CharactersListState(unfilteredCharacters = characters), navigateToDetailScreen = {}, onTriggerEvent = {})
     }
 }

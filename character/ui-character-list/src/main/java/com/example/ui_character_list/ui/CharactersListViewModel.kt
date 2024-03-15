@@ -27,6 +27,7 @@ class CharactersListViewModel(private val getCharactersUsecase: GetCharacters) :
     fun onTriggerEvent(event: CharactersListEvent) {
         when (event) {
             is CharactersListEvent.GetAllCharacters -> getCharacters()
+            is CharactersListEvent.FilterCharacters -> filterCharacters()
             is CharactersListEvent.RemoveHeadFromQueue -> removeHeadMessage()
         }
     }
@@ -35,7 +36,10 @@ class CharactersListViewModel(private val getCharactersUsecase: GetCharacters) :
         viewModelScope.launch {
             getCharactersUsecase()
                 .onLoading { state = state.copy(isLoading = it) }
-                .onSuccess { state = state.copy(characters = it) }
+                .onSuccess {
+                    state = state.copy(unfilteredCharacters = it)
+                    onTriggerEvent(CharactersListEvent.FilterCharacters)
+                }
                 .onError {
                     val errorDescription = when (it) {
                         is ApiException.HttpError -> "Characters not found. Code: ${it.statusCode}"
@@ -45,6 +49,10 @@ class CharactersListViewModel(private val getCharactersUsecase: GetCharacters) :
                 }
                 .collect()
         }
+    }
+
+    private fun filterCharacters() {
+        state = state.copy(characters = state.filteredCharacters)
     }
 
     private fun appendToMessageQueue(uiComponent: UIComponent) {

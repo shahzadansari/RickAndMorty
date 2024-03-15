@@ -56,8 +56,9 @@ fun rememberGenderFilterState() = remember {
 }
 
 @Composable
-fun FilterChipsRow(filterStates: SnapshotStateList<FilterChipState>) {
+fun FilterChipsRow(filterStates: SnapshotStateList<FilterChipState>, modifier: Modifier = Modifier) {
     LazyRow(
+        modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
