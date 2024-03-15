@@ -11,8 +11,8 @@ import com.example.ui_character_list.ui.components.FilterChipState
 
 data class CharactersListState(
     val isLoading: Boolean = false,
-    val characters: List<Character> = listOf(), // For the actual Characters List
     val unfilteredCharacters: List<Character> = listOf(),
+    val characters: List<Character> = unfilteredCharacters, // For the actual Characters List
     val errorQueue: Queue<UIComponent> = Queue(mutableListOf()),
     val statusFilters: SnapshotStateList<FilterChipState> = statusFiltersState.toMutableStateList(),
     val genderFilters: SnapshotStateList<FilterChipState> = genderFiltersState.toMutableStateList()
