@@ -2,6 +2,8 @@ package com.example.ui_character_list.ui
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.snap
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInVertically
@@ -17,16 +19,23 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -41,12 +50,13 @@ import com.example.ui_character_list.ui.components.rememberGenderFilterState
 import com.example.ui_character_list.ui.components.rememberStatusFilterState
 import kotlinx.coroutines.launch
 
-// TODO: 1. Add "No Characters found" state
-// TODO: 2. Hide Bottom Sheet if loading characters
+// TODO: 1. Add "No Characters found" state ✅
+// TODO: 2. Hide Bottom Sheet if loading characters ✅
 // TODO: 3. Extract Screen content
 // TODO: 4. Use FlowRow() for filters
 // TODO: 5. Add clarifying text in Bottom Sheet content
 // TODO: 6. Add Preview states for Expanded and PartiallyExpanded sheet
+// TODO: 7. Filter characters in ViewModel to adhere to Single Source-Of-Truth principle
 
 @SuppressLint("ComposeModifierMissing")
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
@@ -64,6 +74,22 @@ fun CharactersListScreen(
     val statusFilterState = rememberStatusFilterState()
     val genderFilterState = rememberGenderFilterState()
 
+    var enableBottomSheet by rememberSaveable { mutableStateOf(false) }
+    val animatedSheetPeekHeight by animateDpAsState(
+        targetValue = if (enableBottomSheet) {
+            BottomSheetDefaults.SheetPeekHeight
+        } else {
+            0.dp
+        },
+        label = "SheetPeekHeightAnimation"
+    )
+
+    LaunchedEffect(state) {
+        if (!state.isLoading && state.characters.isNotEmpty()) {
+            enableBottomSheet = true
+        }
+    }
+
     DefaultScreenUI(
         isLoading = state.isLoading,
         errorQueue = state.errorQueue,
@@ -72,6 +98,7 @@ fun CharactersListScreen(
     ) {
         BottomSheetScaffold(
             scaffoldState = scaffoldState,
+            sheetPeekHeight = animatedSheetPeekHeight,
             sheetContent = {
                 Column(
                     modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 24.dp),
@@ -87,23 +114,22 @@ fun CharactersListScreen(
                         .fillMaxSize()
                         .padding(paddingValues)
                 ) {
+                    val statusFilters = statusFilterState.toList().filter { it.selected.value }.map { it.label }
+                    val genderFilters = genderFilterState.toList().filter { it.selected.value }.map { it.label }
+
+                    val filteredCharacters = state.characters
+                        .filter { character ->
+                            statusFilters.contains(character.status.name)
+                        }.filter { character ->
+                            genderFilters.contains(character.gender.name)
+                        }
 
                     AnimatedVisibility(
-                        visible = state.characters.isNotEmpty(),
-                        enter = slideInVertically { -it },
-                        exit = slideOutVertically { -it },
-                        label = "CharactersListAnimation"
+                        visible = filteredCharacters.isNotEmpty(),
+                        modifier = Modifier.align(Alignment.Center),
+                        enter = slideInVertically(),
+                        exit = slideOutVertically()
                     ) {
-                        val statusFilters = statusFilterState.toList().filter { it.selected.value }.map { it.label }
-                        val genderFilters = genderFilterState.toList().filter { it.selected.value }.map { it.label }
-
-                        val filteredCharacters = state.characters
-                            .filter { character ->
-                                statusFilters.contains(character.status.name)
-                            }.filter { character ->
-                                genderFilters.contains(character.gender.name)
-                            }
-
                         LazyColumn(
                             modifier = Modifier.padding(vertical = 8.dp),
                             verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -122,6 +148,16 @@ fun CharactersListScreen(
                                 )
                             }
                         }
+                    }
+
+                    val hasNoCharacters = state.characters.isEmpty() || filteredCharacters.isEmpty()
+                    AnimatedVisibility(
+                        visible = !state.isLoading && hasNoCharacters,
+                        modifier = Modifier.align(Alignment.Center),
+                        enter = scaleIn(),
+                        exit = scaleOut(animationSpec = snap())
+                    ) {
+                        Text(text = "No characters found.", style = MaterialTheme.typography.bodyLarge)
                     }
 
                     AnimatedVisibility(
