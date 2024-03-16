@@ -17,14 +17,14 @@ data class CharactersListState(
     val statusFilters: SnapshotStateList<FilterChipState> = statusFiltersState.toMutableStateList(),
     val genderFilters: SnapshotStateList<FilterChipState> = genderFiltersState.toMutableStateList()
 ) {
-    private val enabledStatusFilters get() = statusFilters.toList().filter { it.selected.value }.map { it.label }
-    private val enabledGenderFilters get() = genderFilters.toList().filter { it.selected.value }.map { it.label }
+    private val selectedStatusFilters get() = statusFilters.toList().filter { it.selected.value }.map { it.label }
+    private val selectedGenderFilters get() = genderFilters.toList().filter { it.selected.value }.map { it.label }
 
     val filteredCharacters
         get() = unfilteredCharacters.filter { character ->
-            enabledStatusFilters.contains(character.status.name)
+            selectedStatusFilters.contains(character.status.name)
         }.filter { character ->
-            enabledGenderFilters.contains(character.gender.name)
+            selectedGenderFilters.contains(character.gender.name)
         }
 }
 

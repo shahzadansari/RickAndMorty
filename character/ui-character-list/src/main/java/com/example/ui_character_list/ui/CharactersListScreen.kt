@@ -40,11 +40,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.character_domain.Character
+import com.example.character_domain.CharacterStatus
 import com.example.character_domain.example
 import com.example.components.DefaultScreenUI
 import com.example.components.Previews
+import com.example.components.isInPreview
+import com.example.components.mapIf
 import com.example.components.theme.ModularizedRickAndMortyAppTheme
 import com.example.ui_character_list.components.CharacterListItem
 import com.example.ui_character_list.ui.components.FilterChipState
@@ -53,13 +57,8 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.launch
 
-// TODO: 1. Add "No Characters found" state ✅
-// TODO: 2. Hide Bottom Sheet if loading characters ✅
-// TODO: 3. Extract Screen content ✅
-// TODO: 4. Use FlowRow() for filters
-// TODO: 5. Add clarifying text in Bottom Sheet content
-// TODO: 6. Add Preview states for Expanded and PartiallyExpanded sheet
-// TODO: 7. Filter characters in ViewModel to adhere to Single Source-Of-Truth principle ✅
+// TODO: 1. Use FlowRow() for filters
+// TODO: 2. Add clarifying text in Bottom Sheet content
 
 @SuppressLint("ComposeModifierMissing")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -75,7 +74,6 @@ fun CharactersListScreen(
     val showScrollToTopFAB by remember { derivedStateOf { lazyListState.firstVisibleItemIndex > 3 } }
 
     val scaffoldState = rememberBottomSheetScaffoldState()
-
     var enableBottomSheet by rememberSaveable { mutableStateOf(false) }
     val animatedSheetPeekHeight by animateDpAsState(
         targetValue = if (enableBottomSheet) BottomSheetDefaults.SheetPeekHeight else 0.dp,
@@ -108,7 +106,7 @@ fun CharactersListScreen(
             scaffoldState = scaffoldState,
             sheetPeekHeight = animatedSheetPeekHeight,
             sheetContent = {
-                CharactersFilters(statusFilters = statusFilters, genderFilters = genderFilters)
+                CharactersFiltersBottomSheet(statusFilters = statusFilters, genderFilters = genderFilters)
             },
             content = { paddingValues ->
                 Box(
@@ -170,8 +168,11 @@ private fun CharactersList(characters: ImmutableList<Character>, lazyListStatePr
         ) { character ->
             CharacterListItem(
                 character = character,
-                modifier = Modifier.animateItemPlacement(),
-                onCharacterSelected = onCharacterSelected
+                onCharacterSelected = onCharacterSelected,
+                modifier = Modifier.mapIf(!isInPreview) {
+                    // Disabled for Previews as it crashes Preview with "java.lang.IllegalArgumentException: place is called on a deactivated node"
+                    animateItemPlacement()
+                }
             )
         }
     }
@@ -189,7 +190,7 @@ private fun ScrollToTopFAB(modifier: Modifier = Modifier, onClick: () -> Unit) {
 }
 
 @Composable
-private fun CharactersFilters(statusFilters: SnapshotStateList<FilterChipState>, genderFilters: SnapshotStateList<FilterChipState>, modifier: Modifier = Modifier) {
+private fun CharactersFiltersBottomSheet(statusFilters: SnapshotStateList<FilterChipState>, genderFilters: SnapshotStateList<FilterChipState>, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.padding(start = 24.dp, end = 24.dp, bottom = 24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -201,13 +202,53 @@ private fun CharactersFilters(statusFilters: SnapshotStateList<FilterChipState>,
 
 @Previews
 @Composable
-private fun PreviewCharactersListScreen() {
-    val characters = buildList {
-        repeat(100) {
-            add(Character.example.copy(id = it)) // Replacing "id" with current index as LazyColumn key { } requires a unique identifier for each item
-        }
-    }
+private fun CharactersListScreenPreview() {
+    var state by remember { mutableStateOf(CharactersListState(unfilteredCharacters = sampleCharacters)) }
+
     ModularizedRickAndMortyAppTheme {
-        CharactersListScreen(state = CharactersListState(unfilteredCharacters = characters), navigateToDetailScreen = {}, onTriggerEvent = {})
+        CharactersListScreen(
+            state = state,
+            navigateToDetailScreen = {},
+            onTriggerEvent = { event ->
+                when (event) {
+                    CharactersListEvent.FilterCharacters -> state = state.copy(characters = state.filteredCharacters)
+                    else -> {}
+                }
+            }
+        )
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+private fun CharactersFiltersBottomSheetPreview() {
+    val state = remember { CharactersListState() }
+    ModularizedRickAndMortyAppTheme {
+        CharactersFiltersBottomSheet(statusFilters = state.statusFilters, genderFilters = state.genderFilters)
+    }
+}
+
+@Preview
+@Composable
+private fun ScrollToTopFABPreview() {
+    ModularizedRickAndMortyAppTheme {
+        ScrollToTopFAB(onClick = {})
+    }
+}
+
+/** List of characters with their names and status set to Alive, Dead, Unknown for successive items */
+private val sampleCharacters = buildList {
+    repeat(100) { index ->
+        val status = when (index % 3) {
+            1 -> CharacterStatus.Dead
+            2 -> CharacterStatus.Unknown
+            else -> CharacterStatus.Alive
+        }
+        val character = Character.example.copy(
+            id = index, // Replacing "id" with current index as LazyColumn key { } requires a unique identifier for each item
+            name = status.name,
+            status = status
+        )
+        add(character)
+    }
+}.toImmutableList()
