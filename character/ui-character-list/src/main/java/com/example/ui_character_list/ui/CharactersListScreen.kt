@@ -12,7 +12,10 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -26,6 +29,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
@@ -40,7 +44,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.character_domain.Character
 import com.example.character_domain.CharacterStatus
@@ -56,9 +59,6 @@ import com.example.ui_character_list.ui.components.FilterChipsRow
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.launch
-
-// TODO: 1. Use FlowRow() for filters
-// TODO: 2. Add clarifying text in Bottom Sheet content
 
 @SuppressLint("ComposeModifierMissing")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -192,10 +192,15 @@ private fun ScrollToTopFAB(modifier: Modifier = Modifier, onClick: () -> Unit) {
 @Composable
 private fun CharactersFiltersBottomSheet(statusFilters: SnapshotStateList<FilterChipState>, genderFilters: SnapshotStateList<FilterChipState>, modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.padding(start = 24.dp, end = 24.dp, bottom = 24.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        modifier = modifier.padding(start = 24.dp, top = 8.dp, end = 24.dp, bottom = 24.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+        Text(text = "Filter by Status:", style = MaterialTheme.typography.titleLarge)
         FilterChipsRow(filterStates = statusFilters)
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(text = "Filter by Gender:", style = MaterialTheme.typography.titleLarge)
         FilterChipsRow(filterStates = genderFilters)
     }
 }
@@ -219,20 +224,15 @@ private fun CharactersListScreenPreview() {
     }
 }
 
-@Preview(showBackground = true)
+@Previews
 @Composable
 private fun CharactersFiltersBottomSheetPreview() {
     val state = remember { CharactersListState() }
     ModularizedRickAndMortyAppTheme {
-        CharactersFiltersBottomSheet(statusFilters = state.statusFilters, genderFilters = state.genderFilters)
-    }
-}
-
-@Preview
-@Composable
-private fun ScrollToTopFABPreview() {
-    ModularizedRickAndMortyAppTheme {
-        ScrollToTopFAB(onClick = {})
+        // Needs to be wrapped in Surface to apply proper styling i.e. correct color to text in different UI modes
+        Surface(modifier = Modifier.fillMaxWidth()) {
+            CharactersFiltersBottomSheet(statusFilters = state.statusFilters, genderFilters = state.genderFilters)
+        }
     }
 }
 
