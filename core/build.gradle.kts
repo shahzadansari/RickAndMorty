@@ -11,6 +11,8 @@ java {
 }
 
 dependencies {
+    api(libs.kotlinx.collections.immutable)
+
     implementation(libs.kotlinx.jsonSerialization)
     implementation(libs.ktor.core)
 }

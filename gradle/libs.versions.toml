@@ -14,6 +14,7 @@ jsonSerialization = "1.6.2"
 koin = "3.4.3"
 koinCompose = "3.4.6"
 kotlin = "1.9.22"
+kotlinxCollectionsImmutable = "0.3.7"
 ktor = "2.3.7"
 lifecycleVmKtx = "2.7.0"
 sqlDelight = "1.5.4"
@@ -40,6 +41,7 @@ koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = 
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koinCompose" }
 kotlinx-jsonSerialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "jsonSerialization" }
 kotlinx-coroutinesCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutinesCore" }
+kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
 ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 ktor-androidClient = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktor" }
 ktor-clientSerialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
