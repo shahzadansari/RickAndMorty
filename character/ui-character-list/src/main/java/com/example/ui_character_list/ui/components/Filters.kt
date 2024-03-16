@@ -1,7 +1,6 @@
 package com.example.ui_character_list.ui.components
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -13,6 +12,7 @@ import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -21,7 +21,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.character_domain.Character
 import com.example.character_domain.CharacterStatus
@@ -108,22 +107,22 @@ private fun FilterChipsRowPreview() {
                 genderFilters.contains(character.gender.name)
             }
 
-        Column(
-            modifier = Modifier
-                .background(Color.White)
-                .padding(24.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            FilterChipsRow(filterStates = statusFilterStates)
-            FilterChipsRow(filterStates = genderFilterStates)
+        Surface {
+            Column(
+                modifier = Modifier.padding(24.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                FilterChipsRow(filterStates = statusFilterStates)
+                FilterChipsRow(filterStates = genderFilterStates)
 
-            Text(text = "Total: ${characters.size}")
-            Text(text = "Filtered: ${filteredCharacters.size}")
-            Text(text = "Status filtered: ${statusFilteredList.size}")
-            Text(text = "Gender filtered: ${genderFilteredList.size}")
+                Text(text = "Total: ${characters.size}")
+                Text(text = "Filtered: ${filteredCharacters.size}")
+                Text(text = "Status filtered: ${statusFilteredList.size}")
+                Text(text = "Gender filtered: ${genderFilteredList.size}")
 
-            Text(text = "Status filters: $statusFilters")
-            Text(text = "Gender filters: $genderFilters")
+                Text(text = "Status filters: $statusFilters")
+                Text(text = "Gender filters: $genderFilters")
+            }
         }
     }
 }
