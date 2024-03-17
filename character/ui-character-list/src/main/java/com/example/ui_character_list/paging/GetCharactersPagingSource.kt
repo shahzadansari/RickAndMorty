@@ -2,6 +2,7 @@ package com.example.ui_character_list.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.core.DataState
 import com.example.domain.Character
 import com.example.interactors.GetCharacters
 import kotlinx.coroutines.flow.lastOrNull
@@ -16,14 +17,14 @@ class GetCharactersPagingSource @Inject constructor(
             val currentLoadingPageKey = params.key ?: 1
             val prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey - 1
 
-            val dataState = getCharacters.execute(currentLoadingPageKey).lastOrNull()
-            dataState?.let {
-                LoadResult.Page(
-                    data = it.data ?: throw Exception("Couldn't get characters on page: $currentLoadingPageKey"),
-                    prevKey = prevKey,
-                    nextKey = currentLoadingPageKey.plus(1)
-                )
-            } ?: throw Exception("Couldn't get characters on page: $currentLoadingPageKey")
+            var dataState: DataState<List<Character>>? = null
+            getCharacters.execute(currentLoadingPageKey).collect { dataState = it }
+
+            LoadResult.Page(
+                data = dataState?.data ?: throw Exception("Couldn't get characters on page: $currentLoadingPageKey"),
+                prevKey = prevKey,
+                nextKey = currentLoadingPageKey.plus(1)
+            )
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
