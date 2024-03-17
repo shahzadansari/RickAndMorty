@@ -30,12 +30,6 @@ class CharactersListViewModel @Inject constructor(
         .flow
         .cachedIn(viewModelScope)
 
-    init {
-        viewModelScope.launch {
-            charactersPagingData.collect()
-        }
-    }
-
     fun onTriggerEvent(event: CharactersListEvent) {
         when (event) {
             is CharactersListEvent.GetCharacters -> getCharacters()
