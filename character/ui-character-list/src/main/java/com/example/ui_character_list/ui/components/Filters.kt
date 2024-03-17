@@ -15,9 +15,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
@@ -35,24 +33,6 @@ data class FilterChipState(
     val label: String,
     var selected: Boolean = true
 )
-
-@Composable
-fun rememberStatusFilterState() = remember {
-    CharacterStatus.entries
-        .map { characterStatus ->
-            FilterChipState(label = characterStatus.name)
-        }
-        .toMutableStateList()
-}
-
-@Composable
-fun rememberGenderFilterState() = remember {
-    Gender.entries
-        .map { characterStatus ->
-            FilterChipState(label = characterStatus.name)
-        }
-        .toMutableStateList()
-}
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -89,10 +69,10 @@ fun FilterChipsRow(filterStates: SnapshotStateList<FilterChipState>, modifier: M
 @Composable
 private fun FilterChipsRowPreview() {
     ModularizedRickAndMortyAppTheme {
-        val statusFilterStates = rememberStatusFilterState()
+        val statusFilterStates = rememberStatusFilters()
         val statusFilters = statusFilterStates.toList().filter { it.selected }.map { it.label }
 
-        val genderFilterStates = rememberGenderFilterState()
+        val genderFilterStates = rememberGenderFilters()
         val genderFilters = genderFilterStates.toList().filter { it.selected }.map { it.label }
 
         val statusFilteredList = characters.filter { character ->
@@ -122,12 +102,29 @@ private fun FilterChipsRowPreview() {
                 Text(text = "Filtered: ${filteredCharacters.size}")
                 Text(text = "Status filtered: ${statusFilteredList.size}")
                 Text(text = "Gender filtered: ${genderFilteredList.size}")
-
                 Text(text = "Status filters: $statusFilters")
                 Text(text = "Gender filters: $genderFilters")
             }
         }
     }
+}
+
+@Composable
+private fun rememberStatusFilters() = remember {
+    CharacterStatus.entries
+        .map { status ->
+            FilterChipState(label = status.name)
+        }
+        .toMutableStateList()
+}
+
+@Composable
+private fun rememberGenderFilters() = remember {
+    Gender.entries
+        .map { gender ->
+            FilterChipState(label = gender.name)
+        }
+        .toMutableStateList()
 }
 
 private val characters = listOf(
