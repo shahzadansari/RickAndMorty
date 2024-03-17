@@ -25,13 +25,13 @@ import org.koin.dsl.module
 
 val dataModule = module {
     single<CharactersRemote> {
-        CharactersRemoteImpl(get())
+        CharactersRemoteImpl(httpClient = get())
     }
     single {
-        CharactersDatabase(get())
+        CharactersDatabase(driver = get())
     }
     single<CharactersLocal> {
-        CharactersLocalImpl(get())
+        CharactersLocalImpl(charactersDb = get())
     }
 
     single {

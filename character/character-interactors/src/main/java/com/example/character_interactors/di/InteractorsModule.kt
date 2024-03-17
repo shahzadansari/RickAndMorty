@@ -8,13 +8,13 @@ import org.koin.dsl.module
 
 val interactorsModule = module {
     factory {
-        GetCharacters(get(), get())
+        GetCharacters(service = get(), cache = get())
     }
     factory {
-        GetCharacterFromCache(get())
+        GetCharacterFromCache(cache = get())
     }
     factory {
-        CharacterInteractors(get(), get())
+        CharacterInteractors(getCharacters = get(), getCharacterFromCache = get())
     }
 }
 

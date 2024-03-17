@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
     implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.bundles.paging)
     implementation(libs.sqldelight.androidDriver)
 
     lintChecks(libs.compose.lint.checks)

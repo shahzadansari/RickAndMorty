@@ -5,6 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import com.example.character_domain.Character
 import com.example.character_interactors.GetCharacters
 import com.example.character_interactors.onError
 import com.example.character_interactors.onLoading
@@ -12,7 +16,9 @@ import com.example.character_interactors.onSuccess
 import com.example.core.ApiException
 import com.example.core.Queue
 import com.example.core.UIComponent
+import com.example.ui_character_list.paging.GetCharactersPagingSource
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class CharactersListViewModel(private val getCharactersUsecase: GetCharacters) : ViewModel() {
@@ -20,36 +26,50 @@ class CharactersListViewModel(private val getCharactersUsecase: GetCharacters) :
     var state by mutableStateOf(CharactersListState())
         private set
 
-    init {
-        onTriggerEvent(CharactersListEvent.GetAllCharacters)
+    val charactersPagingData = Pager(
+        config = PagingConfig(20, enablePlaceholders = false),
+        pagingSourceFactory = { GetCharactersPagingSource(getCharactersUsecase) }
+    )
+        .flow
+        .cachedIn(viewModelScope)
+
+//    init {
+//        onTriggerEvent(CharactersListEvent.GetAllCharacters)
+//    }
+
+    // TODO: Should be a CharactersListEvent
+    fun updateUnfilteredCharacters(characters: List<Character>) {
+        // TODO 1: Update unfilteredCharacters list
+        // TODO 2: Apply filters
+        state = state.copy(unfilteredCharacters = characters)
     }
 
     fun onTriggerEvent(event: CharactersListEvent) {
         when (event) {
-            is CharactersListEvent.GetAllCharacters -> getCharacters()
+            is CharactersListEvent.GetAllCharacters -> {} // getCharacters()
             is CharactersListEvent.FilterCharacters -> filterCharacters()
             is CharactersListEvent.RemoveHeadFromQueue -> removeHeadMessage()
         }
     }
 
-    private fun getCharacters() {
-        viewModelScope.launch {
-            getCharactersUsecase()
-                .onLoading { state = state.copy(isLoading = it) }
-                .onSuccess {
-                    state = state.copy(unfilteredCharacters = it)
-                    onTriggerEvent(CharactersListEvent.FilterCharacters)
-                }
-                .onError {
-                    val errorDescription = when (it) {
-                        is ApiException.HttpError -> "Characters not found. Code: ${it.statusCode}"
-                        else -> it.errorMsg
-                    }
-                    appendToMessageQueue(uiComponent = UIComponent.Dialog(title = "Error", description = errorDescription))
-                }
-                .collect()
-        }
-    }
+//    private fun getCharacters() {
+//        viewModelScope.launch {
+//            getCharactersUsecase()
+//                .onLoading { state = state.copy(isLoading = it) }
+//                .onSuccess {
+//                    state = state.copy(unfilteredCharacters = it)
+//                    onTriggerEvent(CharactersListEvent.FilterCharacters)
+//                }
+//                .onError {
+//                    val errorDescription = when (it) {
+//                        is ApiException.HttpError -> "Characters not found. Code: ${it.statusCode}"
+//                        else -> it.errorMsg
+//                    }
+//                    appendToMessageQueue(uiComponent = UIComponent.Dialog(title = "Error", description = errorDescription))
+//                }
+//                .collect()
+//        }
+//    }
 
     private fun filterCharacters() {
         state = state.copy(characters = state.filteredCharacters)

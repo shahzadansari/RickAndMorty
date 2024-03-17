@@ -5,5 +5,5 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val characterDetailsModule = module {
-    viewModel { CharacterDetailsViewModel(get(), get()) }
+    viewModel { CharacterDetailsViewModel(getCharacterFromCacheUsecase = get(), savedStateHandle = get()) }
 }

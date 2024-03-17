@@ -102,7 +102,9 @@ fun CharactersListScreen(
         isLoading = state.isLoading,
         errorQueue = state.errorQueue,
         onRemoveHeadFromQueue = { onTriggerEvent(CharactersListEvent.RemoveHeadFromQueue) },
-        onErrorRetry = { onTriggerEvent(CharactersListEvent.GetAllCharacters) }
+        onErrorRetry = {
+//            onTriggerEvent(CharactersListEvent.GetAllCharacters)
+        }
     ) {
         BottomSheetScaffold(
             scaffoldState = scaffoldState,

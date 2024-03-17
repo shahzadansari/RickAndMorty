@@ -11,10 +11,11 @@ class GetCharacters(
     private val cache: CharactersLocal
 ) {
 
-    operator fun invoke() = flow<DataState<List<Character>>> {
+    operator fun invoke(page: Int = 1) = flow<DataState<List<Character>>> {
+        println("MyTag, GetCharacters invoked! Page: $page")
         val characters = mutableListOf<Character>()
 
-        val dataState = getCharacters(service)
+        val dataState = service.getCharacters(page)
         if (dataState is DataState.Success) {
             characters.addAll(dataState.data)
         }
@@ -28,20 +29,4 @@ class GetCharacters(
             throw dataState.cause as Exception
         }
     }.safeDataStateFlow()
-
-    /**
-     * getCharacters() method returns 60 characters from API. This API automatically limits each API response to 20 characters only and since pagination is not in place yet, this method loads characters till page 3.
-     * */
-    private suspend fun getCharacters(service: CharactersRemote): DataState<List<Character>> {
-        val characters = mutableListOf<Character>()
-        repeat(3) { index ->
-            val dataState = service.getCharacters(index + 1)
-            if (dataState is DataState.Success) {
-                characters.addAll(dataState.data)
-            } else if (dataState is DataState.Error) {
-                return DataState.Error(dataState.cause)
-            }
-        }
-        return DataState.Success(data = characters)
-    }
 }

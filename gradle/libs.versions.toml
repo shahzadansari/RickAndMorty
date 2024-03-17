@@ -17,6 +17,7 @@ kotlin = "1.9.22"
 kotlinxCollectionsImmutable = "0.3.7"
 ktor = "2.3.7"
 lifecycleVmKtx = "2.7.0"
+paging = "3.2.1"
 sqlDelight = "1.5.4"
 
 [libraries]
@@ -51,6 +52,8 @@ lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-view
 lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleVmKtx" }
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleVmKtx" }
 lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleVmKtx" }
+paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
+paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
 sqldelight-androidDriver = { group = "com.squareup.sqldelight", name = "android-driver", version.ref = "sqlDelight" }
 sqldelight-runtime = { group = "com.squareup.sqldelight", name = "runtime", version.ref = "sqlDelight" }
 
@@ -58,6 +61,7 @@ sqldelight-runtime = { group = "com.squareup.sqldelight", name = "runtime", vers
 compose = ["compose-bom", "compose-activity", "compose-animations", "compose-foundation", "compose-material", "compose-navigation", "compose-runtime-livedata", "compose-ui", "compose-ui-tooling", "compose-ui-tooling-preview", "compose-ui-util"]
 ktor = ["ktor-core", "ktor-androidClient", "ktor-clientSerialization", "ktor-contentNegotiation", "ktor-logging"]
 lifecycle = ["lifecycle-runtime-compose", "lifecycle-runtime-ktx", "lifecycle-viewmodel-compose", "lifecycle-viewmodel-ktx"]
+paging = ["paging-runtime", "paging-compose"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.koin.android)
     implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.bundles.paging)
 
     lintChecks(libs.compose.lint.checks)
 }
