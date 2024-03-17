@@ -1,6 +1,7 @@
 package com.example.ui_character_list.ui
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.snap
@@ -89,9 +90,10 @@ fun CharactersListScreen(
     val statusFilters = remember(state) { state.statusFilters }
     val genderFilters = remember(state) { state.genderFilters }
 
+    // Observes Chip selected state changes
     LaunchedEffect(
-        key1 = statusFilters.toList().map { it.selected.value },
-        key2 = genderFilters.toList().map { it.selected.value },
+        key1 = statusFilters.toList().map { it.selected },
+        key2 = genderFilters.toList().map { it.selected },
     ) {
         onTriggerEvent(CharactersListEvent.FilterCharacters)
     }

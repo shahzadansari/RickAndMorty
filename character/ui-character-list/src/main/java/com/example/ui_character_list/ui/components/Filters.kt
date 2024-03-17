@@ -16,6 +16,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
@@ -29,10 +30,10 @@ import com.example.character_domain.example
 import com.example.components.Previews
 import com.example.components.theme.ModularizedRickAndMortyAppTheme
 
+@Stable
 data class FilterChipState(
     val label: String,
-    val selected: MutableState<Boolean> = mutableStateOf(true),
-    val onClick: () -> Unit = { selected.value = !selected.value }
+    var selected: Boolean = true
 )
 
 @Composable
@@ -60,15 +61,17 @@ fun FilterChipsRow(filterStates: SnapshotStateList<FilterChipState>, modifier: M
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        filterStates.forEach { chipState ->
+        filterStates.forEachIndexed { index, chipState ->
             FilterChip(
-                selected = chipState.selected.value,
-                onClick = chipState.onClick,
+                selected = chipState.selected,
+                onClick = {
+                    filterStates[index] = chipState.copy(selected = !chipState.selected)
+                },
                 label = {
                     Text(chipState.label)
                 },
                 leadingIcon = {
-                    if (chipState.selected.value) {
+                    if (chipState.selected) {
                         Icon(
                             imageVector = Icons.Filled.Done,
                             contentDescription = "Done icon",
@@ -87,10 +90,10 @@ fun FilterChipsRow(filterStates: SnapshotStateList<FilterChipState>, modifier: M
 private fun FilterChipsRowPreview() {
     ModularizedRickAndMortyAppTheme {
         val statusFilterStates = rememberStatusFilterState()
-        val statusFilters = statusFilterStates.toList().filter { it.selected.value }.map { it.label }
+        val statusFilters = statusFilterStates.toList().filter { it.selected }.map { it.label }
 
         val genderFilterStates = rememberGenderFilterState()
-        val genderFilters = genderFilterStates.toList().filter { it.selected.value }.map { it.label }
+        val genderFilters = genderFilterStates.toList().filter { it.selected }.map { it.label }
 
         val statusFilteredList = characters.filter { character ->
             statusFilters.contains(character.status.name)

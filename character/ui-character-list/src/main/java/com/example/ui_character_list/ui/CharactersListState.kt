@@ -17,8 +17,8 @@ data class CharactersListState(
     val statusFilters: SnapshotStateList<FilterChipState> = statusFiltersState.toMutableStateList(),
     val genderFilters: SnapshotStateList<FilterChipState> = genderFiltersState.toMutableStateList()
 ) {
-    private val selectedStatusFilters get() = statusFilters.toList().filter { it.selected.value }.map { it.label }
-    private val selectedGenderFilters get() = genderFilters.toList().filter { it.selected.value }.map { it.label }
+    private val selectedStatusFilters get() = statusFilters.toList().filter { it.selected }.map { it.label }
+    private val selectedGenderFilters get() = genderFilters.toList().filter { it.selected }.map { it.label }
 
     val filteredCharacters
         get() = unfilteredCharacters.filter { character ->
