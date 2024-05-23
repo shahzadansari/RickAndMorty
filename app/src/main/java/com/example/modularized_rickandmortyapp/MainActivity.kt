@@ -3,17 +3,16 @@ package com.example.modularized_rickandmortyapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.components.theme.ModularizedRickAndMortyAppTheme
-import com.example.modularized_rickandmortyapp.ui.navigation.Screen
 import com.example.ui_character_details.ui.CharacterDetailsScreen
 import com.example.ui_character_details.ui.CharacterDetailsViewModel
 import com.example.ui_character_list.ui.CharactersListScreen
 import com.example.ui_character_list.ui.CharactersListViewModel
+import kotlinx.serialization.Serializable
 import org.koin.androidx.compose.getViewModel
 
 class MainActivity : ComponentActivity() {
@@ -25,9 +24,15 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = Screen.CharactersList.route
+                    startDestination = Route.CharactersListScreen
                 ) {
-                    charactersListScreen(navController)
+                    charactersListScreen(
+                        onCharacterSelected = { characterId ->
+                            navController.navigate(Route.CharacterDetailsScreen(characterId)) {
+                                launchSingleTop = true
+                            }
+                        }
+                    )
                     characterDetailsScreen()
                 }
             }
@@ -35,17 +40,23 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-fun NavGraphBuilder.charactersListScreen(navController: NavController) {
-    composable(
-        route = Screen.CharactersList.route
-    ) {
+@Serializable
+sealed interface Route {
+
+    @Serializable
+    data object CharactersListScreen : Route
+
+    @Serializable
+    data class CharacterDetailsScreen(val characterId: Int) : Route
+}
+
+fun NavGraphBuilder.charactersListScreen(onCharacterSelected: (characterId: Int) -> Unit) {
+    composable<Route.CharactersListScreen> {
         val viewModel: CharactersListViewModel = getViewModel()
         CharactersListScreen(
             state = viewModel.state,
             navigateToDetailScreen = { characterId ->
-                navController.navigate("${Screen.CharacterDetails.route}/$characterId") {
-                    launchSingleTop = true
-                }
+                onCharacterSelected(characterId)
             },
             onTriggerEvent = {
                 viewModel.onTriggerEvent(it)
@@ -55,10 +66,7 @@ fun NavGraphBuilder.charactersListScreen(navController: NavController) {
 }
 
 fun NavGraphBuilder.characterDetailsScreen() {
-    composable(
-        route = Screen.CharacterDetails.route + "/{characterId}",
-        arguments = Screen.CharacterDetails.arguments
-    ) {
+    composable<Route.CharacterDetailsScreen> {
         val viewModel: CharacterDetailsViewModel = getViewModel()
         CharacterDetailsScreen(
             state = viewModel.state,

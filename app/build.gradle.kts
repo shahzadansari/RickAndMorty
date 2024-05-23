@@ -4,6 +4,8 @@ plugins {
     id(libs.plugins.android.application.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.kotlin.kapt.get().pluginId)
+    id(libs.plugins.kotlin.serialization.get().pluginId)
+    id(libs.plugins.kotlin.parcelize.get().pluginId) // needed only for non-primitive classes
 }
 
 android {
@@ -61,6 +63,7 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
+    implementation(libs.kotlinx.jsonSerialization)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.sqldelight.androidDriver)
 
