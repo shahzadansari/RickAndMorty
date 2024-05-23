@@ -1,9 +1,9 @@
 [versions]
-androidGradlePlugin = "8.2.2"
+androidGradlePlugin = "8.4.1"
 appCompat = "1.6.1"
 coil = "2.5.0"
 composeActivity = "1.8.2"
-composeBom = "2024.01.00"
+composeBom = "2024.05.00"
 composeMaterial3 = "1.2.0-rc01"
 composeNavigation = "2.8.0-beta01"
 composeUiToolingPreview = "1.6.0"
@@ -13,7 +13,7 @@ coroutinesCore = "1.7.3"
 kotlinxSerialization = "1.6.3"
 koin = "3.4.3"
 koinCompose = "3.4.6"
-kotlin = "1.9.22"
+kotlin = "2.0.0"
 kotlinxCollectionsImmutable = "0.3.7"
 ktor = "2.3.7"
 lifecycleVmKtx = "2.7.0"
@@ -64,6 +64,7 @@ android-application = { id = "com.android.application", version.ref = "androidGr
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 java-library = { id = "java-library" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize" }
