@@ -142,5 +142,5 @@ All contributions are welcomed. This project is still in development. If you enc
 
 **Shahzad Ansari**
 
-[![Twitter](https://img.shields.io/badge/-twitter-grey?logo=twitter)](https://twitter.com/Shahzad_Ansari3)
+[![Twitter](https://img.shields.io/badge/-twitter-grey?logo=twitter)](https://x.com/Shahzad_Ansari3)
 [![Linkedin](https://img.shields.io/badge/-linkedin-grey?logo=linkedin)](https://www.linkedin.com/in/shahzadansari6/)
